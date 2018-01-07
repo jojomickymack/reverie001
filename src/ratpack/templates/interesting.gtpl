@@ -1,6 +1,7 @@
 yieldUnescaped '<!DOCTYPE html>'
 
 html {
+
     head {
         meta(charset:'utf-8')
         title('Reverie + Fun')
@@ -10,6 +11,7 @@ html {
         meta(name: 'viewport', content: 'width=device-width, initial-scale=1')
 
         link(href: '/images/favicon.png', rel: 'shortcut icon')
+        script('', type:'text/javascript', src:'/scripts/myscript.js')
     }
 
     body {
@@ -17,10 +19,11 @@ html {
 
         section {
             h2 title
-            p 'Click on the link below to see something interesting.'
-            a href: '/interesting', 'click here'
+            p 'you should see something interesting below'
+            div(id: 'myContainer')
+            includeGroovy('physics.gtpl')
         }
 
-        footer { includeGroovy('footer.gtpl') }    
+        footer { includeGroovy('footer.gtpl') }
     }
 }
