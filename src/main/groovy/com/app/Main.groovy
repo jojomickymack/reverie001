@@ -17,8 +17,6 @@ class Main {
 
         def contents = new JsonSlurper().parseText(new URL('http://localhost:9292/contents').getText())
 
-        println contents[1].title
-
         RatpackServer.start{ s -> s
 
             .serverConfig{ b ->
@@ -40,9 +38,9 @@ class Main {
                     render groovyMarkupTemplate('interesting.gtpl')
                 }
 
-                for (content in contents) {
+                contents.eachWithIndex { content, i ->
                     get(content.title) {
-                        render groovyMarkupTemplate('blog_entry.gtpl', title: content.title)
+                        render groovyMarkupTemplate('blog_entry.gtpl', title: contents[i].title)
                     }
                 }
             })
