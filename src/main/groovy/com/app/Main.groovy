@@ -8,9 +8,17 @@ import ratpack.server.BaseDir
 import ratpack.groovy.template.MarkupTemplateModule
 import static ratpack.groovy.Groovy.groovyMarkupTemplate
 
+import groovy.json.JsonSlurper
+import java.net.URL
+
 class Main {
 
     public static void main(String[] args) {
+
+        def contents = new JsonSlurper().parseText(new URL('http://localhost:9292/contents').getText())
+
+        println contents[1].title
+
         RatpackServer.start{ s -> s
 
             .serverConfig{ b ->
@@ -30,6 +38,12 @@ class Main {
 
                 get('interesting') {
                     render groovyMarkupTemplate('interesting.gtpl')
+                }
+
+                for (content in contents) {
+                    get(content.title) {
+                        render groovyMarkupTemplate('blog_entry.gtpl', title: content.title)
+                    }
                 }
             })
         }
