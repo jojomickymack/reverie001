@@ -31,7 +31,7 @@ class Main {
                 files { dir 'public' }
 
                 get {
-                    render groovyMarkupTemplate('index.gtpl')
+                    render groovyMarkupTemplate('index.gtpl', contents: contents)
                 }
 
                 get('interesting') {
@@ -39,7 +39,7 @@ class Main {
                 }
 
                 contents.eachWithIndex { content, i ->
-                    get(content.title) {
+                    get(content.url) {
                         render groovyMarkupTemplate('blog_entry.gtpl', title: contents[i].title)
                     }
                 }

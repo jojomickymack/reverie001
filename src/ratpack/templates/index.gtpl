@@ -18,9 +18,20 @@ html {
         section {
             h2 title
             p 'Click on the link below to see something interesting.'
-            a href: '/interesting', 'click here'
+            a href: 'interesting', 'click here'
         }
 
-        footer { includeGroovy('footer.gtpl') }    
+        section {
+            h2 'here are the links'
+            ul {
+                for (content in contents) {
+                    li {
+                        a(href: content.url, content.title)
+                    }
+                }
+            }
+        }
+
+        footer { includeGroovy('footer.gtpl') }
     }
 }
