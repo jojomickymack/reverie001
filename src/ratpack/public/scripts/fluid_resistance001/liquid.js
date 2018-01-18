@@ -15,7 +15,7 @@ var Liquid = function(x, y, w, h, c) {
     return l.x > this.x && l.x < this.x + this.w &&
            l.y > this.y && l.y < this.y + this.h;
   };
-    
+
   // Calculate drag force
   this.calculateDrag = function(m) {
     // Magnitude is coefficient * speed squared
@@ -25,19 +25,17 @@ var Liquid = function(x, y, w, h, c) {
     // Direction is inverse of velocity
     var dragForce = m.velocity.copy();
     dragForce.mult(-1);
-    
+
     // Scale according to magnitude
     // dragForce.setMag(dragMagnitude);
     dragForce.normalize();
     dragForce.mult(dragMagnitude);
     return dragForce;
   };
-    
+
   this.display = function() {
     noStroke();
-    fill(50);
+    fill(50, 225, 10);
     rect(this.x, this.y, this.w, this.h);
   };
 };
-  
-

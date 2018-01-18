@@ -1,6 +1,0 @@
-script('', type:'text/javascript', src: '/scripts/physics/lib/p5.min.js')
-script('', type:'text/javascript', src: '/scripts/physics/lib/p5.dom.min.js')
-script('', type:'text/javascript', src: '/scripts/physics/lib/p5.sound.min.js')
-script('', type:'text/javascript', src: '/scripts/physics/mover.js')
-script('', type:'text/javascript', src: '/scripts/physics/liquid.js')
-script('', type:'text/javascript', src: '/scripts/physics/sketch.js')

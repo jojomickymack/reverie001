@@ -18,7 +18,7 @@ html {
         section {
             h2 title
             p 'Click on the link below to see something interesting.'
-            a href: 'interesting', 'click here'
+            a href: 'projects/interesting', 'click here'
         }
 
         section {

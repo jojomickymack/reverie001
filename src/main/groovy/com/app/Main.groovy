@@ -34,7 +34,7 @@ class Main {
                     render groovyMarkupTemplate('index.gtpl', contents: contents)
                 }
 
-                get('interesting') {
+                get('projects/interesting') {
                     render groovyMarkupTemplate('interesting.gtpl')
                 }
 

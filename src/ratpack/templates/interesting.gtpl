@@ -1,3 +1,6 @@
+String p5Dir = '/scripts/p5js/'
+String sketchDir = '/scripts/fluid_resistance001/'
+
 yieldUnescaped '<!DOCTYPE html>'
 
 html {
@@ -11,7 +14,6 @@ html {
         meta(name: 'viewport', content: 'width=device-width, initial-scale=1')
 
         link(href: '/images/favicon.png', rel: 'shortcut icon')
-        script('', type:'text/javascript', src:'/scripts/myscript.js')
     }
 
     body {
@@ -21,7 +23,12 @@ html {
             h2 title
             p 'you should see something interesting below'
             div(id: 'myContainer')
-            includeGroovy('physics.gtpl')
+            script('', type:'text/javascript', src: "${p5Dir}p5.min.js")
+            script('', type:'text/javascript', src: "${p5Dir}p5.dom.min.js")
+            script('', type:'text/javascript', src: "${p5Dir}p5.sound.min.js")
+            script('', type:'text/javascript', src: "${sketchDir}mover.js")
+            script('', type:'text/javascript', src: "${sketchDir}liquid.js")
+            script('', type:'text/javascript', src: "${sketchDir}sketch.js")
         }
 
         footer { includeGroovy('footer.gtpl') }

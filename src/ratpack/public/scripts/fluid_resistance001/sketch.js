@@ -31,7 +31,7 @@ function setup() {
 }
 
 function draw() {
-  background(127);
+  background(190, 0, 190);
 
   // Draw water
   liquid.display();

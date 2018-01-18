@@ -14,7 +14,7 @@ function Mover(m,x,y) {
     var f = p5.Vector.div(force,this.mass);
     this.acceleration.add(f);
   };
-    
+
   this.update = function() {
     // Velocity changes according to acceleration
     this.velocity.add(this.acceleration);
@@ -27,7 +27,7 @@ function Mover(m,x,y) {
   this.display = function() {
     stroke(0);
     strokeWeight(2);
-    fill(255,127);
+    fill(30, 230, 255);
     ellipse(this.position.x,this.position.y,this.mass*16,this.mass*16);
   };
 
@@ -40,8 +40,3 @@ function Mover(m,x,y) {
   };
 
 }
-
-
-
-
-
