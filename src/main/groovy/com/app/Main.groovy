@@ -15,6 +15,12 @@ class Main {
 
     public static void main(String[] args) {
 
+        def projects = ['reverse_fluid',
+            'spirals',
+            'cubes',
+            'particles',
+            'sphere']
+
         def contents = new JsonSlurper().parseText(new URL('http://localhost:9292/contents').getText())
 
         RatpackServer.start{ s -> s
@@ -31,11 +37,13 @@ class Main {
                 files { dir 'public' }
 
                 get {
-                    render groovyMarkupTemplate('index.gtpl', contents: contents)
+                    render groovyMarkupTemplate('index.gtpl', projects: projects, contents: contents)
                 }
 
-                get('projects/interesting') {
-                    render groovyMarkupTemplate('interesting.gtpl')
+                projects.eachWithIndex { project, i ->
+                    get("projects/$project") {
+                        render groovyMarkupTemplate("${projects[i]}.gtpl")
+                    }
                 }
 
                 contents.eachWithIndex { content, i ->

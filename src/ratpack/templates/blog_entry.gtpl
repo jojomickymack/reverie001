@@ -21,7 +21,7 @@ html {
             h2 title
             p 'gonna put some stuff here'
             p entry.long_title
-            p entry.title_img_path
+            img(src: "/images/blog/$entry.title_img_path")
             p entry.content
         }
 

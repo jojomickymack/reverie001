@@ -18,7 +18,18 @@ html {
         section {
             h2 title
             p 'Click on the link below to see something interesting.'
-            a href: 'projects/interesting', 'click here'
+            a href: 'projects/reverse_fluid', 'click here'
+        }
+
+        section {
+            h2 'here are the projects'
+            ul {
+                for (project in projects) {
+                    li {
+                        a(href: "projects/$project", project)
+                    }
+                }
+            }
         }
 
         section {

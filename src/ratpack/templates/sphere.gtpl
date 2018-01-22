@@ -1,5 +1,5 @@
 String p5Dir = '/scripts/p5js/'
-String sketchDir = '/scripts/fluid_resistance001/'
+String sketchDir = '/scripts/p5_sketches/sphere001/'
 
 yieldUnescaped '<!DOCTYPE html>'
 
@@ -21,13 +21,11 @@ html {
 
         section {
             h2 title
-            p 'you should see something interesting below'
+            p 'sphere'
             div(id: 'myContainer')
             script('', type:'text/javascript', src: "${p5Dir}p5.min.js")
             script('', type:'text/javascript', src: "${p5Dir}p5.dom.min.js")
             script('', type:'text/javascript', src: "${p5Dir}p5.sound.min.js")
-            script('', type:'text/javascript', src: "${sketchDir}mover.js")
-            script('', type:'text/javascript', src: "${sketchDir}liquid.js")
             script('', type:'text/javascript', src: "${sketchDir}sketch.js")
         }
 
