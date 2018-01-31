@@ -18,7 +18,7 @@ html {
         section {
             h2 title
             p 'Click on the link below to see something interesting.'
-            a href: 'projects/reverse_fluid', 'click here'
+            a href: 'games/tutorial', 'click here'
         }
 
         section {

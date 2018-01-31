@@ -40,6 +40,10 @@ class Main {
                     render groovyMarkupTemplate('index.gtpl', projects: projects, contents: contents)
                 }
 
+                get('games/tutorial') {
+                    render groovyMarkupTemplate('tutorial.gtpl')
+                }
+
                 projects.eachWithIndex { project, i ->
                     get("projects/$project") {
                         render groovyMarkupTemplate("${projects[i]}.gtpl")
