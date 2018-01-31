@@ -17,7 +17,7 @@ html {
 
         section {
             h2 title
-            p 'Click on the link below to see something interesting.'
+            p 'Click on the link below to check out a cool game.'
             a href: 'games/tutorial', 'click here'
         }
 

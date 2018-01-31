@@ -4,7 +4,6 @@ html {
     head {
         meta(charset:'utf-8')
         title('Launcher Page')
-        link(href: '/styles/launcher_style.css', rel: 'stylesheet', type: 'text/css')
         link(href: '/images/favicon.png', rel: 'shortcut icon')
     }
 
