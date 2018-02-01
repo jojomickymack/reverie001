@@ -12,7 +12,11 @@ http.post(body: postBody) { resp, json ->
 yieldUnescaped '<!DOCTYPE html>'
 
 html {
-    includeGroovy('head.gtpl')
+
+    head {
+        title('Reverie + Fun')
+        link(href: '/images/favicon.png', rel: 'shortcut icon')
+    }
 
     body {
         header { includeGroovy('header.gtpl') }
