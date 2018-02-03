@@ -19,7 +19,7 @@ function setup() {
   var text = createP("click mouse to reset");
 
   var myCanvas = createCanvas(640, 360);
-  myCanvas.parent('myContainer');
+  myCanvas.parent('myCanvas');
 
   reset();
   // Create liquid object

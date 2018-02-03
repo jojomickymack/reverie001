@@ -1,6 +1,6 @@
-function thatFunction()
+function launchGame(iframePath)
 {
-    document.getElementById("jsgame").setAttribute("src", "/games/tutorial001/game.html");
+    document.getElementById("jsgame").setAttribute("src", iframePath);
     var elem = document.getElementById("jsgame");
     elem.width = 480;
     elem.height = 360;

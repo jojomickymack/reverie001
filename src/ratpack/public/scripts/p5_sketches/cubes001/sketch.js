@@ -1,5 +1,6 @@
 function setup(){
-    createCanvas(640, 360, WEBGL);
+    var myCanvas = createCanvas(640, 360, WEBGL);
+    myCanvas.parent('myCanvas');
 }
 
 function draw(){
