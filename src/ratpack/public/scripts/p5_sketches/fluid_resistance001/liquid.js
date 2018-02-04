@@ -24,7 +24,7 @@ var Liquid = function(x, y, w, h, c) {
 
     // Direction is inverse of velocity
     var dragForce = m.velocity.copy();
-    dragForce.mult(-1);
+    dragForce.mult(-1.8);
 
     // Scale according to magnitude
     // dragForce.setMag(dragMagnitude);
@@ -35,7 +35,7 @@ var Liquid = function(x, y, w, h, c) {
 
   this.display = function() {
     noStroke();
-    fill(50, 225, 10);
+    fill(50, 225, 100);
     rect(this.x, this.y, this.w, this.h);
   };
 };

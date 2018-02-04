@@ -13,5 +13,5 @@ function launchGame(iframePath)
     } else if (elem.webkitRequestFullscreen) {
       elem.webkitRequestFullscreen();
     }
-    document.getElementById("myButton").setAttribute("disabled", true);
+    //document.getElementById("myButton").setAttribute("disabled", true);
 }

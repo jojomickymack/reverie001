@@ -3,40 +3,40 @@
 // http://natureofcode.com
 
 function Mover(m,x,y) {
-  this.mass = m;
-  this.position = createVector(x,y);
-  this.velocity = createVector(0,0);
-  this.acceleration = createVector(0,0);
+    this.dead = false;
+    this.mass = m;
+    this.position = createVector(x,y);
+    this.velocity = createVector(0,0);
+    this.acceleration = createVector(0,0);
 
-  // Newton's 2nd law: F = M * A
-  // or A = F / M
-  this.applyForce = function(force) {
+    // Newton's 2nd law: F = M * A
+    // or A = F / M
+    this.applyForce = function(force) {
     var f = p5.Vector.div(force,this.mass);
     this.acceleration.add(f);
-  };
+    };
 
-  this.update = function() {
+    this.update = function() {
     // Velocity changes according to acceleration
     this.velocity.add(this.acceleration);
     // position changes by velocity
     this.position.add(this.velocity);
     // We must clear acceleration each frame
     this.acceleration.mult(0);
-  };
+};
 
-  this.display = function() {
-    stroke(0);
-    strokeWeight(2);
-    fill(30, 230, 255);
-    ellipse(this.position.x,this.position.y,this.mass*16,this.mass*16);
-  };
+    this.display = function() {
+        stroke(0);
+        strokeWeight(2);
+        fill(255, 180, 180 * this.mass / 3);
+        ellipse(this.position.x, this.position.y, this.mass * 12, this.mass * 12);
+    };
 
-  // Bounce off bottom of window
-  this.checkEdges = function() {
-    if (this.position.y > height) {
-      this.velocity.y *= -0.9;  // A little dampening when hitting the bottom
-      this.position.y = height;
-    }
-  };
+    // Bounce off bottom of window
+    this.checkEdges = function() {
+        if (this.position.y > height) {
+          this.dead = true;
+        }
+    };
 
 }

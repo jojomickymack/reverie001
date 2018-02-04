@@ -22,9 +22,9 @@ html {
 
         section {
             h2 game.title
-            iframe(id: 'jsgame', msallowfullscreen: 'true', allowfullscreen: 'true', frameborder: '0', scrolling: 'no', allowtransparency: 'true', webkitallowfullscreen: 'true', mozallowfullscreen: 'true') {}
+            iframe(id: 'jsgame', src: game.iframe_path, width: 480, height: 360, msallowfullscreen: 'true', allowfullscreen: 'true', frameborder: '0', scrolling: 'no', allowtransparency: 'true', webkitallowfullscreen: 'true', mozallowfullscreen: 'true') {}
             br {}
-            input(id: 'myButton', class: 'button', type: 'button', onclick: "target='jsgame'; launchGame('$game.iframe_path');", value: 'Launch Game')
+            input(id: 'myButton', class: 'button', type: 'button', onclick: "target='jsgame'; launchGame('$game.iframe_path');", value: 'Launch Fullscreen')
 
             script(type: 'text/javascript', src: '/scripts/buttonScript.js') {}
         }

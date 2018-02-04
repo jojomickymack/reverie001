@@ -11,7 +11,7 @@ html {
         header { includeGroovy('header.gtpl') }
 
         section {
-            h2 'here are the links'
+            h2 'cliq dem links'
             ul {
                 for (content in contents) {
                     li {
