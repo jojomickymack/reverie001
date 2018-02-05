@@ -14,19 +14,29 @@ yieldUnescaped '<!DOCTYPE html>'
 html {
 
     head {
-        title('Reverie + Fun')
+        title(title)
         link(href: '/images/favicon.png', rel: 'shortcut icon')
     }
 
     body {
         header { includeGroovy('header.gtpl') }
 
-        section {
-            h2 title
-            p 'gonna put some stuff here'
-            p entry.long_title
-            img(src: "/images/blog/$entry.title_img_path")
-            p entry.content
+        div(class: 'container') {
+            div (class:'row justify-content-center') {
+
+                section(class: 'paper') {
+
+                    div(class: 'head') {
+                        div(class: 'spHeading') {
+                            h2 title
+                        }
+                    }
+
+                    p entry.long_title
+                    img(src: "/images/blog/$entry.title_img_path")
+                    p entry.content
+                }
+            }
         }
 
         footer { includeGroovy('footer.gtpl') }

@@ -20,13 +20,24 @@ html {
     body {
         header { includeGroovy('header.gtpl') }
 
-        section {
-            h2 game.title
-            iframe(id: 'jsgame', src: game.iframe_path, width: 480, height: 360, msallowfullscreen: 'true', allowfullscreen: 'true', frameborder: '0', scrolling: 'no', allowtransparency: 'true', webkitallowfullscreen: 'true', mozallowfullscreen: 'true') {}
-            br {}
-            input(id: 'myButton', class: 'button', type: 'button', onclick: "target='jsgame'; launchGame('$game.iframe_path');", value: 'Launch Fullscreen')
+        div(class: 'container') {
+            div (class:'row justify-content-center') {
 
-            script(type: 'text/javascript', src: '/scripts/buttonScript.js') {}
+                section(class: 'paper') {
+
+                    div(class: 'head') {
+                        div(class: 'spHeading') {
+                            h2 game.title
+                        }
+                    }
+
+                    iframe(id: 'jsgame', src: game.iframe_path, width: 480, height: 360, msallowfullscreen: 'true', allowfullscreen: 'true', frameborder: '0', scrolling: 'no', allowtransparency: 'true', webkitallowfullscreen: 'true', mozallowfullscreen: 'true') {}
+                    br {}
+                    input(id: 'myButton', class: 'button', type: 'button', onclick: "target='jsgame'; launchGame('$game.iframe_path');", value: 'Launch Fullscreen')
+
+                    script(type: 'text/javascript', src: '/scripts/buttonScript.js') {}
+                }
+            }
         }
 
         footer { includeGroovy('footer.gtpl') }
