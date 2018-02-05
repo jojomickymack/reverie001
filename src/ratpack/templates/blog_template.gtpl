@@ -16,6 +16,7 @@ html {
     head {
         title(title)
         link(href: '/images/favicon.png', rel: 'shortcut icon')
+        link(rel: 'import', href: "/bower_components/marked-element/marked-element.html")
     }
 
     body {
@@ -33,8 +34,12 @@ html {
                     }
 
                     p entry.long_title
-                    img(src: "/images/blog/$entry.title_img_path")
-                    p entry.content
+                    img(src: entry.title_img_path)
+                    div(slot: 'markdown-html') {}
+                    'marked-element'(markdown: new File("src/ratpack/public/$entry.markdown_path").getText()) {
+
+                        //script(type: 'text/markdown', src: entry.markdown_path) {}
+                    }
                 }
             }
         }

@@ -22,7 +22,11 @@ header, footer {
     box-shadow: 5px 10px;
 }
 
-header > h1, footer > h1 {
+header a:hover {
+    text-decoration: none;
+}
+
+header h1, footer > h1 {
     font-family: 'Dancing Script', cursive;
     font-weight: bold;
     color: red;

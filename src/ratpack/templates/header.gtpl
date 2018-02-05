@@ -27,4 +27,4 @@ script('', type: 'text/javascript', src: '/scripts/main.js')
 
 link(href: '/styles/main.css', rel: 'stylesheet', type: 'text/css')
 
-h1 'Reverie + Fun'
+a(href: '/'){ h1 'Reverie + Fun' }

@@ -6,7 +6,7 @@ def blue = '#9381ff'
 def purple = '#c521bc'
 def red = '#ef233c'
 def aqua = '#247ba0'
-def orange = '#ffb800'
+def orange = '#ffb200'
 
 def colors = [blue, purple, red, aqua, orange]
 
