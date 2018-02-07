@@ -35,11 +35,9 @@ html {
 
                     p entry.long_title
                     img(src: entry.title_img_path)
-                    div(slot: 'markdown-html') {}
-                    'marked-element'(markdown: new File("src/ratpack/public/$entry.markdown_path").getText()) {
 
-                        //script(type: 'text/markdown', src: entry.markdown_path) {}
-                    }
+                    div(slot: 'markdown-html') {}
+                    'marked-element'(markdown: new File("src/ratpack/public/$entry.markdown_path").getText()) {}
                 }
             }
         }

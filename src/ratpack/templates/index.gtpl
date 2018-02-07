@@ -25,7 +25,6 @@ html {
         title('Reverie + Fun')
         link(href: '/images/favicon.png', rel: 'shortcut icon')
 
-        script(src: "/bower_components/webcomponentsjs/webcomponents-lite.js") {}
         link(rel: 'import', href: "/bower_components/wired-button/wired-button.html")
     }
 

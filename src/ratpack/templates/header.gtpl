@@ -14,6 +14,10 @@ script('', type: 'text/javascript', src: '/bower_components/bootstrap/dist/js/bo
 
 script('', type: 'text/javascript', src: '/bower_components/responsive-bootstrap-toolkit/dist/bootstrap-toolkit.min.js')
 
+// web components polyfill
+
+script(src: "/bower_components/webcomponentsjs/webcomponents-lite.js") {}
+
 // fonts
 
 link(href: 'https://fonts.googleapis.com/css?family=Dancing+Script', rel: 'stylesheet')
