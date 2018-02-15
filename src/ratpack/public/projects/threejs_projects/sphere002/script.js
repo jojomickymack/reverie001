@@ -20,7 +20,7 @@ function init() {
 	scene.add( mesh );
 
 	renderer = new THREE.WebGLRenderer( { antialias: true } );
-	
+
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	renderer.setClearColor(new THREE.Color(0x000, 1.0));
 
@@ -37,4 +37,15 @@ function animate() {
 
 	renderer.render( scene, camera );
 
+}
+
+window.addEventListener( 'resize', onWindowResize, false );
+
+function onWindowResize(){
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize( window.innerWidth, window.innerHeight );
+	console.log("new window size " + window.innerWidth + " : " + window.innerHeight);
 }
