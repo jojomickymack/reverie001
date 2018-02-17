@@ -1,5 +1,3 @@
-import java.awt.Color
-
 yieldUnescaped '<!DOCTYPE html>'
 
 def blue = '#9381ff'
