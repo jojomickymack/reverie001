@@ -33,7 +33,16 @@ function draw() {
     text('click on the window to pause/play the sound', 10, 30);
 }
 
+function touchStarted() {
+    switchState();
+    return false;
+}
+
 function mousePressed() {
+    switchState();
+}
+
+function switchState() {
     changing = true;
     lerpInc *= -1;
 
