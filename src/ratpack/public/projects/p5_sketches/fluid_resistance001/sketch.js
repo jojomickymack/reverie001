@@ -17,8 +17,6 @@ var liquid;
 function setup() {
     var myCanvas = createCanvas(windowWidth, windowHeight);
     myCanvas.parent('myCanvas');
-    var fs = fullscreen();
-    fullscreen(!fs);
     reset();
 }
 

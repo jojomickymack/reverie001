@@ -22,6 +22,8 @@ def getRandomMargin() {
 html {
 
     head {
+        meta(id: 'viewport', name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no', charset: 'utf-8')
+        meta(description: 'join the reverie! it\'s a bunch of games, animations, blogs and stuff like that')
         title('Reverie + Fun')
         link(href: '/images/favicon.png', rel: 'shortcut icon')
 
