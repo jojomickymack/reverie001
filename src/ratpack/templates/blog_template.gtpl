@@ -16,6 +16,7 @@ html {
     head {
         meta(id: 'viewport', name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no', charset: 'utf-8')
         title(title)
+        link(href: 'https://fonts.googleapis.com/css?family=Lato', rel: 'stylesheet') 
         link(href: '/images/favicon.png', rel: 'shortcut icon')
         link(rel: 'import', href: "/bower_components/marked-element/marked-element.html")
     }
@@ -26,7 +27,7 @@ html {
         div(class: 'container') {
             div (class:'row justify-content-center') {
 
-                section(class: 'paper') {
+                section(class: 'paper blog') {
 
                     div(class: 'head') {
                         div(class: 'spHeading') {

@@ -30,7 +30,7 @@ function draw() {
     background(current)
     textSize(18);
     fill(0, 102, 153);
-    text('click on the window to pause/play the sound', 10, 30);
+    text('click/touch the window to pause/play the sound', 10, 30);
 }
 
 function touchStarted() {

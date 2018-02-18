@@ -91,6 +91,12 @@ wired-button:hover {
     min-height: 800px;
 }
 
+.blog {
+    padding-right: 60px;
+    padding-bottom: 40px;
+    font-family: 'Lato', sans-serif;
+}
+
 .xs .paper {
     min-width: 0px;
 }
