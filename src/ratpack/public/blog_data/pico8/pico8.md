@@ -41,6 +41,47 @@ You'll also probably want to modify your sprite sheet externally, since tools li
 
 You can just as easily use the export command to generate a binary form of your game, or an html page with a pico-8 instance and your cart pre-loaded. The webpage version of pico-8 works by leveraging [Emscripten](https://kripken.github.io/emscripten-site/), just like love.js and other projects. It's basically able to compile c to javascript, and due to the simplicity of Pico-8, this distribution format is extremely stable.
 
+## First Pico-8 Game
+
+Save what's below in a .p8 file, start Pico-8, navigate to where it is, load it, and type run, you'll see 'hello world' appear on the screen.
+
+  pico-8 cartridge
+
+  __lua__
+
+  function _draw()
+      cls()
+      print('hello world', 0, 0, 7)
+  end
+
+The line below 'pico-8 cartridge' is reserved for the version number, which you'd see there if you save the game after loading. function _draw() is called 60 times a second, cls() is the funtion to clear the screen, and the arguments for print() are the string to be printed, the x and y coordinates, and the color. 7 happens to be the color white. You can see the colors in order in the tilesheet tab.
+
+Only slightly more complex, using the rnd(x) function will product a random number between 0 and x. Given that the screen is 128x128 and that there's 16 colors, you would see 'hello world' flashing around the screen with rainbow colors with this one. Now that cls() isn't getting called to clear the screen the text will persist on the screen.
+
+  pico-8 cartridge
+
+  __lua__
+
+  function _load()
+    x, y = 0, 0 
+  end
+
+  function _update()
+    x, y = rnd(128), rnd(128)
+  end
+
+  function _draw()
+    print('hello world', x, y, rnd(16))
+  end
+
+Similar to how love2d works, a Pico-8 program will have a function _load(), which is run once, and a function _update() and function _draw(), which are called over and over as the game runs.
+
+Now hit escape and click on the tilesheet editor. Make sure to have selected box 000, which is the top left square in the tilesheet, and then replace the print call with the line below.
+
+  spr(0, x, y, 1, 1)
+
+You should see your sprite drawn in random positions all over the screen.
+
 ## Interested In Learning More?
 
 The best way to learn about the Pico-8 api is by reading the [manual](https://www.lexaloffle.com/pico-8.php?page=manual) and by reading some of the readily available source code to games.
