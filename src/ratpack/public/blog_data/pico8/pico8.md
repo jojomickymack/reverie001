@@ -1,4 +1,3 @@
-
 # Pico-8 - Fantasy Console
 
 [Pico-8](https://www.lexaloffle.com/pico-8.php) is the creation of 'zep', a genius whose fascination with classic low power computers let to the invention of a number of 'toy computer' platforms. It turns out that Pico-8 was the product of several iterations of interesting experiments which ultimately led to something called [Voxatron](https://www.lexaloffle.com/voxatron.php), a miraculous platform for generating 3d voxel based game experiences _targeting html_. That Voxatron and Pico-8 are complete platforms can't be overstated - included is a system of developing, distributing, loading and modifying 'carts', which are stored in an online repository connected to the system.
@@ -45,40 +44,40 @@ You can just as easily use the export command to generate a binary form of your 
 
 Save what's below in a .p8 file, start Pico-8, navigate to where it is, load it, and type run, you'll see 'hello world' appear on the screen.
 
-  pico-8 cartridge
+	pico-8 cartridge
 
-  __lua__
+	__lua__
 
-  function _draw()
-      cls()
-      print('hello world', 0, 0, 7)
-  end
+	function _draw()
+	  cls()
+	  print('hello world', 0, 0, 7)
+	end
 
 The line below 'pico-8 cartridge' is reserved for the version number, which you'd see there if you save the game after loading. function _draw() is called 60 times a second, cls() is the funtion to clear the screen, and the arguments for print() are the string to be printed, the x and y coordinates, and the color. 7 happens to be the color white. You can see the colors in order in the tilesheet tab.
 
 Only slightly more complex, using the rnd(x) function will product a random number between 0 and x. Given that the screen is 128x128 and that there's 16 colors, you would see 'hello world' flashing around the screen with rainbow colors with this one. Now that cls() isn't getting called to clear the screen the text will persist on the screen.
 
-  pico-8 cartridge
+	pico-8 cartridge
 
-  __lua__
+	__lua__
 
-  function _load()
-    x, y = 0, 0 
-  end
+	function _load()
+	  x, y = 0, 0 
+	end
 
-  function _update()
-    x, y = rnd(128), rnd(128)
-  end
+	function _update()
+	  x, y = rnd(128), rnd(128)
+	end
 
-  function _draw()
-    print('hello world', x, y, rnd(16))
-  end
+	function _draw()
+	  print('hello world', x, y, rnd(16))
+	end
 
 Similar to how love2d works, a Pico-8 program will have a function _load(), which is run once, and a function _update() and function _draw(), which are called over and over as the game runs.
 
 Now hit escape and click on the tilesheet editor. Make sure to have selected box 000, which is the top left square in the tilesheet, and then replace the print call with the line below.
 
-  spr(0, x, y, 1, 1)
+	spr(0, x, y, 1, 1)
 
 You should see your sprite drawn in random positions all over the screen.
 
