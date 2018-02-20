@@ -18,6 +18,8 @@ function setup() {
     myCanvas.parent('myCanvas');
     song.loop(); // song is ready to play during setup() because it was loaded during preload
     background(current);
+
+    img = loadImage('boombox1.png');
 }
 
 function draw() {
@@ -31,6 +33,7 @@ function draw() {
     textSize(18);
     fill(0, 102, 153);
     text('click/touch the window to pause/play the sound', 10, 30);
+    image(img, width / 2 - img.width / 2, height / 2 - img.height / 2);
 }
 
 function touchStarted() {
