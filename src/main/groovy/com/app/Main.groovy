@@ -16,7 +16,6 @@ class Main {
     public static void main(String[] args) {
 
         def contents = new JsonSlurper().parseText(new URL('http://localhost:9292/contents').getText())
-        Collections.shuffle(contents)
 
         RatpackServer.start{ s -> s
 

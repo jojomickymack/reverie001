@@ -1,20 +1,25 @@
 yieldUnescaped '<!DOCTYPE html>'
 
 def blue = '#9381ff'
+def royalblue = '#6536e8'
+def darkOrange = '#ee5622'
 def purple = '#c521bc'
+def green = '#5ae177'
+def honey = '#d6b906'
 def red = '#ef233c'
+def ruby = '#c51f5d'
 def aqua = '#247ba0'
 def orange = '#ffb200'
 
-def colors = [blue, purple, red, aqua, orange]
+def colors = [blue, royalblue, darkOrange, purple, green, honey, red, ruby, aqua, orange]
 
 def getRandom(myArray) {
-    def myIndex = ((Math.random() * myArray.size()).trunc()).toInteger()
+    def myIndex = Math.floor(Math.random() * myArray.size()).toInteger()
     myArray[myIndex]
 }
 
 def getRandomMargin() {
-    (Math.random() * 80).trunc(2).toInteger()
+    Math.floor(Math.random() * 40)
 }
 
 html {
@@ -41,10 +46,13 @@ html {
                         }
                     }
 
+                    ArrayList indexes = 0..<contents.size()
+                    Collections.shuffle(indexes)
+
                     ul {
-                        for (content in contents) {
+                        for (i in indexes) {
                             li {
-                                a(href: content.url, style: "margin-left: ${getRandomMargin()}%;"){'wired-button'(text: content.title, style: "color: ${getRandom(colors)};") {}}
+                                a(href: contents[i].url, style: "margin-left: ${getRandomMargin()}%;"){'wired-button'(text: contents[i].title, elevation: Math.floor(Math.random() * 5), style: "color: ${getRandom(colors)}; padding: ${Math.floor(Math.random() * 20) + 8}px;") {}}
                             }
                         }
                     }
