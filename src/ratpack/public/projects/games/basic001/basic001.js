@@ -74,7 +74,7 @@ ApplicationMain.init = function() {
 	}
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "57", company : "HaxeFlixel", file : "basic001", fps : 60, name : "basic001", orientation : "", packageName : "com.example.myapp", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 360, parameters : "{}", resizable : false, stencilBuffer : true, title : "basic001", vsync : true, width : 480, x : null, y : null}]};
+	ApplicationMain.config = { build : "58", company : "HaxeFlixel", file : "basic001", fps : 60, name : "basic001", orientation : "", packageName : "com.example.myapp", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 360, parameters : "{}", resizable : false, stencilBuffer : true, title : "basic001", vsync : true, width : 480, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -2020,7 +2020,7 @@ openfl_display_Sprite.prototype = $extend(openfl_display_DisplayObjectContainer.
 });
 var Main = function() {
 	openfl_display_Sprite.call(this);
-	this.addChild(new flixel_FlxGame(240,180,PlayState,1,60,60,true,false));
+	this.addChild(new flixel_FlxGame(240,180,PlayState,1,60,60,true,true));
 };
 $hxClasses["Main"] = Main;
 Main.__name__ = ["Main"];
