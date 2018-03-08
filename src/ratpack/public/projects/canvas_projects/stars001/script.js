@@ -10,9 +10,9 @@ var starCount = 50;
 var stars = [];
 var rotationSpeed = 0.07;
 
-var requestAnimationFrame = window.requestAnimationFrame || 
-                            window.mozRequestAnimationFrame || 
-                            window.webkitRequestAnimationFrame || 
+var requestAnimationFrame = window.requestAnimationFrame ||
+                            window.mozRequestAnimationFrame ||
+                            window.webkitRequestAnimationFrame ||
                             window.msRequestAnimationFrame;
 
 function drawStar(star, index) {
@@ -85,14 +85,11 @@ function reset() {
 
     stars = [];
     for (var i = 0; i < starCount; i++) {
-        stars.push(new Star(Math.random() * canvas.width, 
+        stars.push(new Star(Math.random() * canvas.width,
             Math.random() * canvas.height,
-            Math.floor(Math.floor(Math.random() * 255)),
-            Math.floor(Math.floor(Math.random() * 255)),
-            Math.floor(Math.floor(Math.random() * 255))));
+            Math.floor(Math.random() * 255),
+            Math.floor(Math.random() * 255),
+            Math.floor(Math.random() * 255)));
     }
     drawStars();
 }
-
-
-

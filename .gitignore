@@ -1,2 +1,6 @@
 .gradle/
 build/
+
+# the plan is to scp files to this directory for distribution
+
+src/ratpack/public/fs/
