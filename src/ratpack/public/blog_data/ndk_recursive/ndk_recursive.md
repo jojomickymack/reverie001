@@ -128,3 +128,5 @@ I've uploaded the finished app sourcecode on github.
 The finished apk (signed for distribution) at the link below.
 
 [c_thing005.apk](http://reverie.fun/fs/c_thing005.apk)
+
+Note - one of the interesting things about this app, which relates to what I wrote at the top of this about how recursion can be dangerous, is that you can expect the app to crash when putting higher numbers in the input field. I'm not accepting any inputs above 1000 iterations because none of the devices I tested were capable of going that deep, the app crashes. The limit on my phones is a little over 900 iterations, and on my chromebook it's somewhere around 300-500 iterations.
