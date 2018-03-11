@@ -40,12 +40,13 @@ You're all ready to start passing data between your application and cpp file. Th
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
      * @param myNum
+     * @param increasing
      */
     public native String stringFromJNI(int myNum, boolean increasing);
 
 You can add additional arguments to the method call, be sure to add them to the method definition in your cpp file as well.
 
-	Java_central_com_MainActivity_stringFromJNI(JNIEnv *env, jobject /\* this */, int myNum, bool myBool) { ...
+	Java_central_com_MainActivity_stringFromJNI(JNIEnv *env, jobject /* this */, int myNum, bool myBool) { ...
 
 Note that the JNIEnv and jobject parameters are implicit - they're sort of magically added at the call site. Back in my activity, I can call the method like this.
 	
