@@ -129,4 +129,8 @@ The finished apk (signed for distribution) at the link below.
 
 [c_thing005.apk](http://reverie.fun/fs/c_thing005.apk)
 
-Note - one of the interesting things about this app, which relates to what I wrote at the top of this about how recursion can be dangerous, is that you can expect the app to crash when putting higher numbers in the input field. I'm not accepting any inputs above 1000 iterations because none of the devices I tested were capable of going that deep, the app crashes. The limit on my phones is a little over 900 iterations, and on my chromebook it's somewhere around 300-500 iterations.
+Note - the app crashes when running higher numbers of iterations. I'm doubtful that it's the recursion stack that's causing that, it's more likely it's because the entire stringstream is getting passed back to java and getting appended to a text buffer.
+
+update - by commenting out the parts of the app that interact with text (in the recursive function as well) the iteration limit was raised to somewhere between 1400 and 1500 iterations, so I think the use of recursion alone is causing the crash.
+
+A/libc: Fatal signal 11 (SIGSEGV), code 2, fault addr 0xbe119ff8 in tid 19492 (central.com)
