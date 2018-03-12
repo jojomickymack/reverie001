@@ -54,7 +54,7 @@ Note that the JNIEnv and jobject parameters are implicit - they're sort of magic
 
 The only difference between what I've shown here and the original HelloJNI example is the additional arguments.
 
-## Not Doing 'Hello World'
+## 'Hello Recursion'
 
 To start with a specified number as the max number of stars, I made a function that checks if it's met one of two nested termination conditions, the outermost checks if the inner one is still less than the max limit, and the inner one, which does each row of stars gets incremented higher each time it's met. The whole file is below.
 
