@@ -131,7 +131,7 @@ The finished apk (signed for distribution) at the link below.
 
 Note - the app crashes when running higher numbers of iterations. I'm doubtful that it's the recursion stack that's causing that, it's more likely it's because the entire stringstream is getting passed back to java and getting appended to a text buffer.
 
-update - by commenting out the parts of the app that interact with text (in the recursive function as well) the iteration limit was raised to somewhere between 1400 and 1500 iterations, so I think the use of recursion alone is causing the crash.
+update - by commenting out the parts of the app that interact with text (in the recursive function as well) the iteration limit was raised to somewhere between 1400 and 1500 iterations.
 
 A/libc: Fatal signal 11 (SIGSEGV), code 2, fault addr 0xbe119ff8 in tid 19492 (central.com)
 
