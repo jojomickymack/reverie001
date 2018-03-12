@@ -134,3 +134,5 @@ Note - the app crashes when running higher numbers of iterations. I'm doubtful t
 update - by commenting out the parts of the app that interact with text (in the recursive function as well) the iteration limit was raised to somewhere between 1400 and 1500 iterations, so I think the use of recursion alone is causing the crash.
 
 A/libc: Fatal signal 11 (SIGSEGV), code 2, fault addr 0xbe119ff8 in tid 19492 (central.com)
+
+update - I was curious what the performance would be like using java instead of cpp, and tolerance for recursion was _way worse_. With appending text the app would crash at about 250 iterations, and with the text handling commented out it would crash between 500 and 550 iterations. I suppose this test actually highlights a scenario where you'd _want_ to use the native library over java! Keep in mind that all the tests I did were on mobile devices with limited resources.
