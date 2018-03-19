@@ -49,7 +49,7 @@ You can add additional arguments to the method call, be sure to add them to the 
 	Java_central_com_MainActivity_stringFromJNI(JNIEnv *env, jobject /* this */, int myNum, bool myBool) { ...
 
 Note that the JNIEnv and jobject parameters are implicit - they're sort of magically added at the call site. Back in my activity, I can call the method like this.
-	
+
 	stringFromJNI(myNum, increasing);
 
 The only difference between what I've shown here and the original HelloJNI example is the additional arguments.
@@ -62,8 +62,10 @@ To start with a specified number as the max number of stars, I made a function t
     #include <string>
     #include <sstream>
 
-    std::stringstream ss;
-    std::string output;
+    using namespace std;
+
+    stringstream ss;
+    string output;
     int maxStars;
     int counter;
     int stopper;
