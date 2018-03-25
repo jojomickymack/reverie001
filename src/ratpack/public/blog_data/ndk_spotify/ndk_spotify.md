@@ -105,7 +105,7 @@ Basically, the characters are read in and re-encoded to a c type string which I 
 
 Now, really just for testing the json library and making sure I could move onto more complex things, I re-encoded the string, parsed the json, and just dumped it back into a java string and back in my application I dumped the string into a textview.
 
-Below is my simple json parsing/ dumping native function. Calling json.dump(2). Makes it pretty print the json with an indentation of 2.
+Below is my simple json parsing/ dumping native function. Calling json.dump(2) makes it pretty print the json with an indentation of 2.
 
 	extern "C"  
 	  
@@ -195,9 +195,10 @@ I had a lot of fun messing around with Spotify's rest api and overcoming the typ
 
 ## Source / Working App
 
-I've uploaded the finished app sourcecode on github.
+I've uploaded the finished app sourcecode on github. 
+
 [github repo](https://github.com/jojomickymack/spotbubsort003)
 
 The finished apk (signed for distribution) at the link below.
 
-[spotbubsort003.apk](fs/spotbubsort003.apk)
+[spotbubsort003.apk](http://reverie.fun/fs/spotbubsort003.apk)
