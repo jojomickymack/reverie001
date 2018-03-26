@@ -49,13 +49,13 @@ There were some tricks to getting this to work for my android app - firstly, I h
 	URL url = new URL("https://tastedive.com/api/similar?q=" + searchTerm + "?k=" + apiKey);  
 	HttpURLConnection conn = (HttpURLConnection) url.openConnection();  
 	try {  
-	  InputStream is = new BufferedInputStream(conn.getInputStream());  
-	  int ch;  
-	  StringBuilder sb = new StringBuilder();  
-	  while ((ch = is.read()) != -1) {  
+    InputStream is = new BufferedInputStream(conn.getInputStream());  
+    int ch;  
+    StringBuilder sb = new StringBuilder();  
+    while ((ch = is.read()) != -1) {  
       sb.append((char) ch);  
     }  
-	 this.response = sb.toString();  
+    this.response = sb.toString();  
 	} finally {  
 	  conn.disconnect();  
 	}
