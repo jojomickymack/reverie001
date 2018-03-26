@@ -53,8 +53,9 @@ There were some tricks to getting this to work for my android app - firstly, I h
 	  int ch;  
 	  StringBuilder sb = new StringBuilder();  
 	  while ((ch = is.read()) != -1) {  
-	  sb.append((char) ch);  
-	 }  this.response = sb.toString();  
+      sb.append((char) ch);  
+    }  
+	 this.response = sb.toString();  
 	} finally {  
 	  conn.disconnect();  
 	}
