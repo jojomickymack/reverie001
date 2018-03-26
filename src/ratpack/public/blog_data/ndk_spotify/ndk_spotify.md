@@ -116,7 +116,7 @@ Below is my simple json parsing/ dumping native function. Calling json.dump(2) m
 	  return env->NewStringUTF(output.c_str());  
 	}
 
-I now had a list of recommended artists based on whatever search term I submitted! Still - I don't have any way of sorting the data - it was then that I turned to the Spotify rest api and the while sticking to the same patterns above, the app became 100x more complicated!
+I now had a list of recommended artists based on whatever search term I submitted! Still - I don't have any way of sorting the data - it was then that I turned to the Spotify rest api and the while sticking to the same patterns above, the app became much more complex.
 
 ## Time For Spotify
 
