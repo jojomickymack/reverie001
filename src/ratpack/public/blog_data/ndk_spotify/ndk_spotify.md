@@ -79,10 +79,10 @@ This library is absolutely amazing - all you have to do is include a single head
 	json myJson = json::parse(myString);
 	string albumName = myJson["artists"]["items"][0]["album"]["name"]
 
-Of course there were some obstacles at that point - firstly - I wanted to put the header file in an 'include' directory as I'm accustomed to. In order to do that, you need to add this to your CMakeLists.txt file.
+Of course there were some obstacles at that point - firstly - I wanted to put the header file in an 'include' directory as I'm accustomed to. In order to do that, you need to add this to your CMakeLists.txt file. There's no requirement for where this actually is, I decided to put it in the root of the 'app' module, since there's a 'libs' directory there as well, it seems fitting. 
 
 	target_include_directories(super-lib PRIVATE  
-                       src/main/include ) 
+                       include ) 
 super-lib is the name of my library - yours is probably different. Now after putting json.hpp into my include folder, I can use it in my super-lib.cpp file like so.
 
 	#include <json.hpp>  
@@ -195,7 +195,7 @@ I had a lot of fun messing around with Spotify's rest api and overcoming the typ
 
 ## Source / Working App
 
-I've uploaded the finished app sourcecode on github. 
+I've uploaded the finished app sourcecode on github. Note - you will need to register your own spotify app and put the creds in the MainActivity.java file. If you boot the app and see a white screen, it's probably because the clientId and clientSecret are wrong.
 
 [github repo](https://github.com/jojomickymack/spotbubsort003)
 
