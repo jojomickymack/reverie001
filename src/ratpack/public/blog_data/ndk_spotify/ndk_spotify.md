@@ -49,15 +49,15 @@ There were some tricks to getting this to work for my android app - firstly, I h
 	URL url = new URL("https://tastedive.com/api/similar?q=" + searchTerm + "?k=" + apiKey);  
 	HttpURLConnection conn = (HttpURLConnection) url.openConnection();  
 	try {  
-	  InputStream is = new BufferedInputStream(conn.getInputStream());  
-	  int ch;  
-	  StringBuilder sb = new StringBuilder();  
-	  while ((ch = is.read()) != -1) {  
-	  sb.append((char) ch);  
-	 }  
-	 this.response = sb.toString();  
+		InputStream is = new BufferedInputStream(conn.getInputStream());  
+		int ch;  
+		StringBuilder sb = new StringBuilder();  
+		while ((ch = is.read()) != -1) {  
+			sb.append((char) ch);  
+		}  
+		this.response = sb.toString();  
 	} finally {  
-	  conn.disconnect();  
+		conn.disconnect();  
 	}
 
 My initial problem was that when executing the http request, java tried to process the response before the http response had actually come back. I had to start using threads and a special thread.join() method to make sure the app waited until the thread had ended before moving onto the next step. My http request method is in a class which implements 'Runnable', and the method above is in a method which overrides 'run'.
