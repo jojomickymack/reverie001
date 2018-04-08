@@ -34,7 +34,9 @@ There was a fork from MinGW32 to add the 64 bit version and you may accidentally
 
 Make sure to add the 'bin' directory to your system PATH. After doing that, you'll have gcc and g++ on the command line, as well as the mingw version of 'make', which can be run with the special 'mingw32-make' command. You'll find it isn't really the same as the real 'make', but it can do a lot.
 
-MSYS is a terminal emulator which used to come with MinGW, but it doesn't anymore. You may recognize it from 'Git Bash' - it's the same terminal. MSYS2 can be downloaded from [here](http://www.msys2.org/), and it includes MinGW. I'm tempted to assume that you could just use the included compiler for everything, but I haven't really tried that and can't confirm that it works exactly the same, but I have compiled many libraries with it.
+MSYS is a terminal emulator which used to come with MinGW, but it doesn't anymore. You may recognize it from 'Git Bash' - it's the same terminal. MSYS2 can be downloaded from [here](http://www.msys2.org/), and it includes the package manager 'pacman' which can be used to install tools, like mingw, into the shell environment. In order to get a working c/cpp compiler toolchain set up in MSYS2, run 'pacman -Syu', restart the shell, run it again (?), then run 'pacman -S mingw-w64-x86_64-gcc'. After it downloads some packages, you should have gcc and g++ available on the shell, type 'gcc --version' and 'g++ --version' to verify it.
+
+I'm tempted to assume that you could just use the included compiler for everything, but I haven't really tried that and can't confirm that it works exactly the same, but I have compiled many libraries with it.
 
 If you install MSYS264, keep in mind that both 32 bit and 64 bit MinGW compilers are included and there's a separate shell executable to use either one - so if you are trying to build something intended for the 64 bit compiler you'll have to use the correct shell.
 
