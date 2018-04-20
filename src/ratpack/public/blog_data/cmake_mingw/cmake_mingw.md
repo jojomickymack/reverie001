@@ -81,13 +81,13 @@ Note, when you search for sdl2 using 'pacman -Ss sdl2', you'll find packages tha
   
 the full list of sdl2 packages is below
 
-  mingw-w64-x86_64-SDL2
-  mingw-w64-x86_64-smpeg2
-  mingw-w64-x86_64-SDL2_mixer
-  mingw-w64-x86_64-SDL2_image
-  mingw-w64-x86_64-SDL2_gfx
+  mingw-w64-x86_64-SDL2 
+  mingw-w64-x86_64-smpeg2 
+  mingw-w64-x86_64-SDL2_mixer 
+  mingw-w64-x86_64-SDL2_image 
+  mingw-w64-x86_64-SDL2_gfx 
   mingw-w64-x86_64-SDL2_ttf 
-  mingw-w64-x86_64-SDL2_net  
+  mingw-w64-x86_64-SDL2_net 
 
 For more detailed info on pacman, check [this link](https://wiki.archlinux.org/index.php/Pacman).
 
