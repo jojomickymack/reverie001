@@ -24,7 +24,13 @@ Unfortunately, CMake has notoriously bad documentation and due to the two part c
 
 Don't lose hope - c/cpp is still worth pursuing and once you get CMake working you'll use the same buildscripts over and over again. It can be downloaded and installed from [here](https://cmake.org/download/). The CMake bin directory will be added to your PATH automatically.
 
+Note: you can install cmake as a package using MSYS2 instead of the way described above.
+
 ## Introducing MinGW and MSYS2
+
+Note: while you can install mingw as a standalone and it works nicely, it's actually included when you install MSYS2. My recommendation is to just skip to the section about MSYS2 and go that route - the reason being is that using pacman (the package manager included in MSYS2) makes it much _much_ easier to install libraries than just using mingw alone.
+
+...
 
 The gnu c/cpp compilers I've been referring to, gcc and g++ are command line tools which were brought about in linux-land. If you are compelled to develop on Windows, you are going to have a hard time. That being said, those tools and many other unix tools such as make, can be installed with MinGW, which is not a totally straightforward process.
 
@@ -34,18 +40,66 @@ There was a fork from MinGW32 to add the 64 bit version and you may accidentally
 
 Make sure to add the 'bin' directory to your system PATH. After doing that, you'll have gcc and g++ on the command line, as well as the mingw version of 'make', which can be run with the special 'mingw32-make' command. You'll find it isn't really the same as the real 'make', but it can do a lot.
 
-MSYS is a terminal emulator which used to come with MinGW, but it doesn't anymore. You may recognize it from 'Git Bash' - it's the same terminal. MSYS2 can be downloaded from [here](http://www.msys2.org/), and it includes the package manager 'pacman' which can be used to install tools, like mingw, into the shell environment. In order to get a working c/cpp compiler toolchain set up in MSYS2, run 'pacman -Syu', restart the shell, run it again, then run 'pacman -S mingw-w64-x86_64-gcc'. After it downloads some packages, you should have gcc and g++ available on the shell, type 'gcc --version' and 'g++ --version' to verify it. Install the 'mingw-w64-x86_64-make' so you can run the 'mingw32-make' command. You can also install normal 'make' with 'pacman -S make'.
-
-I'm tempted to assume that you could just use the included compiler for everything, but I haven't really tried that and can't confirm that it works exactly the same, but I have compiled many libraries with it.
-
-If you install MSYS264, keep in mind that both 32 bit and 64 bit MinGW compilers can be used and there's a separate shell executable to use either one - so if you are trying to build something intended for the 64 bit compiler you'll have to use the correct shell - notices about 'bad archetecture' may be related to that.
-
-## Here's The Recipe
-
-Firstly, you won't get anywhere with CMake if it can't find the compilers for c/cpp. It's said that you can set the locations of those binaries in the CMakeLists.txt file itself, but I found that didn't work on Windows. You need to set system variables that CMake will use to find those tools.
+Important system variables are listed below - both gcc and g++ are in mingw's bin directory.
 
 The location of gcc needs to be the value of a variable called CC.
 The location of g++ needs to be the value of a variable called CXX.
+
+Note, there is a tool called 'libtool' that you may run into problems with because it doesn't understand windows backslashes. I've fixed issues I've seen where libtool can't find gcc because it's looking for it with a path like c:somdiranotherdirmingw64bingcc.exe
+
+To work around this, reset the variable with forward slashes.
+
+export CC="C:/somedir/anotherdir/mingw/bin/gcc.exe"
+
+## Introducing MSYS2
+
+MSYS is a terminal emulator which used to come with MinGW, but it doesn't anymore. You may recognize it from 'Git Bash' - it's the same terminal. 
+
+MSYS2 can be downloaded from [here](http://www.msys2.org/), and it includes the package manager 'pacman' which can be used to install tools, like mingw, into the shell environment. If you're using the shell to build things, you probably want to just install MSYS2 and install your build tools from there, and set your CC and CXX system variables to point to the c/cpp compilers inside of msys2's mingw directory.
+
+In order to get a working c/cpp compiler toolchain set up in MSYS2, you'll first need to update the shell.
+
+  pacman -Syu
+
+This will download updated packages for everything, including pacman itself. You'll need to restart the shell and run it again.
+
+pacman is similar to apt-get on ubuntu or yum on redhat. Every pacman command has an obligitory -S flag it seems. To search for packages, use 'pacman -Ss searchterm'. It seems that the 32 bit packages all have 'mingw-w64-i686' a dash, then the name of the package and 64 bit all have 'mingw-w64-x86_64'.
+
+The command for installing gcc for your 64bit mingw instance is below.
+
+  pacman -S mingw-w64-x86_64-gcc
+
+After it downloads some packages, you should have gcc and g++ available on the shell, type 'gcc --version' and 'g++ --version' to verify it. 
+
+You also want the mingw32-make command, install this package to get it.
+
+  pacman -S mingw-w64-x86_64-make
+
+Note, when you search for sdl2 using 'pacman -Ss sdl2', you'll find packages that probably make it so you can skip the sdl2 installation steps, you can just do commands like the one below.
+
+  pacman -S mingw-w64-x86_64-SDL2
+  
+the full list of sdl2 packages is below
+
+  mingw-w64-x86_64-SDL2
+  mingw-w64-x86_64-smpeg2
+  mingw-w64-x86_64-SDL2_mixer
+  mingw-w64-x86_64-SDL2_image
+  mingw-w64-x86_64-SDL2_gfx
+  mingw-w64-x86_64-SDL2_ttf 
+  mingw-w64-x86_64-SDL2_net  
+
+For more detailed info on pacman, check [this link](https://wiki.archlinux.org/index.php/Pacman).
+
+If you install MSYS264, keep in mind that both 32 bit and 64 bit MinGW compilers can be used and there's a separate shell executable to use either one - so if you are trying to build something intended for the 64 bit compiler you'll have to use the correct shell - notices about 'bad archetecture' may be related to that.
+
+Note: after struggling to build some specific libraries from source using mingw standalone, I instead installed the library using pacman and had success. I'd recommend using MSYS2 instead of the standalone mingw compiler.
+
+Again, just like if you were using the standalone mingw, you'll want to set the CC and CXX system variables to the location of cgg and g++ which are in mingw's bin directory.
+
+## Here's The Recipe
+
+Firstly, you won't get anywhere with CMake if it can't find the compilers for c/cpp. It's said that you can set the locations of those binaries in the CMakeLists.txt file itself, but I found that didn't work on Windows. You need to set system variables that CMake will use to find those tools. See previously mentioned notes about the CC and CXX environment variables.
 
 A basic CMakeLists.txt file is below, and it should be in the root directory of your project where the source code is in a folder called 'src'.
 
