@@ -91,7 +91,7 @@ Interestingly, some of the themes that I'd thought about with the cpp version of
 
 I am planning on doing some of the things I thought about previously as suitable improvements to the ui elements and having an overarching 'button' type with function callbacks, and now that I've ported the project to go, I think it'll be a lot easier to reason about without getting into the weeds and danger zones of cpp.
 
-For
+Seems to me like cpp's great, but if you're looking for a modern continuation of what c did for the world of programming, you might agree that go is like the new version of c that the previous generation never got.
 
 Source on github
 
