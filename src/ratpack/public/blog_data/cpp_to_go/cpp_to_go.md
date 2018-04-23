@@ -41,9 +41,11 @@ you can install cmake just as easily, might as well have it
 	
 	pacman -S mingw-w64-x86_64-cmake
 
-now set env variables for CC and CXX pointing to gcc.exe and g++.exe and reboot your computer so they're loaded.
+now set env variables for CC and CXX pointing to gcc.exe and g++.exe and reboot your computer so they're loaded. Also, add the mingw64/bin directory to your system's path.
 
 extra points - you can install llvm and clang in MSYS2 as well. For those that don't know, clang is a toolchain 'frontend' which will give you vastly more helpful debugging info - to use it you'll set CC and CXX to point respectively to clang.exe and clang++.exe. This isn't recommended here since I've seen clang cause compilation issues with go-sdl2, so you should use it if you're developing with cpp, not go.
+
+side note: you may as well install pkg-config and portaudio - while it has nothing to do with this project, portaudio is required by [this](https://github.com/fogleman/nes).
 
 You're done.
 
@@ -59,9 +61,9 @@ Basically, I implemented almost the same exact method 4 times, and coded 4 insta
 
 In addition, these 'buttons' are just rectangles that become filled rectangles when you click within their bounds - quick and dirty, sure, but there are ui libraries that would make this more of a 'normal' app. I imagined how cool it would be to have a draggable slider to adjust how many stripes where shown - coding that would take a lot of lines and would have pretty flaky performance I'm guessing - a great opportunity to pull in some kind of ui library.
 
-Furthermore, since the whole thing is composed of rectangles, why not make it so the stripes themselves are buttons - perhaps they could have some kind of callback when you clicked on them. It's begging for some kind of overarching button type that I knew I didn't know how to code yet.
+Furthermore, since the whole thing is composed of rectangles, why not make it so the stripes themselves are buttons - perhaps they could have some kind of callback when you clicked on them. It's begging for some kind of overarching button type that I was worried about implementing poorly, so I just left it as-is for now.
 
-So I just left it the way it was and rewrote it in go, since I view that as the more dynamic and malleable paradigm.
+Rewriting it in go is a step towards that more dynamic version - there's a lot of compelling reasons to do that if you want to explore reflection, functional patterns and reducing code repetition without blowing your leg off.
 
 Source on github
 
@@ -81,7 +83,7 @@ It's a very exciting cross platform application development platform, as well as
 
 ## Go Project - Links And Thoughts
 
-About 6 or seven months ago I was able to easily bang out some fractal zooming apps and physics experiments. I should tune those up and get them up on github, so this isn't the first go-sdl2 project I've done.
+About 6 or seven months ago I was able to easily bang out some [fractal zooming apps](https://github.com/jojomickymack/mandelb001) and physics experiments. I should tune those up and get them up on github, so this isn't the first go-sdl2 project I've done.
 
 I attempted to port the cpp app over to go, warts and all. The key difference was how my structs were instantiated, and instead of having a class representing the ColorContainer, I just added a constructor and some functions on a struct called ColorList.
 
@@ -90,6 +92,12 @@ One of the main things I like about the go implementation is the initialization 
 Interestingly, some of the themes that I'd thought about with the cpp version of the project seemed a little clearer to me when porting this to go. One theme of functional programming is that you don't want to have side-effects and operate on a construct in memory - instead of doing a destructive sort on a list, you should create a new list and return that. With go, that's a lot easier to achieve. I suppose I made a copy of the list and then mutated that - which is sort of not what you're supposed to do - but I wonder if there's a better way to implement an insert sort when you're committed to building a whole new list. I wonder if there's a performance advantage/disadvantage to doing it like that? I will experiment with that.
 
 I am planning on doing some of the things I thought about previously as suitable improvements to the ui elements and having an overarching 'button' type with function callbacks, and now that I've ported the project to go, I think it'll be a lot easier to reason about without getting into the weeds and danger zones of cpp.
+
+One thing I wanted to highlight is that I skipped implementing this in the cpp version, but in a side project getting sdl and gfx to run on android I realized it was a necessity. Without constraint, sdl will attempt to run he game loop as many times as it possibly can (and frequently impossibly can't). The app would run at full blast -- probably at over 100 fps, then lock up my android device. Once I added [this](https://www.libsdl.org/release/SDL-1.2.15/docs/html/guidetimeexamples.html) to achieve a constant framerate, the crashing never happened anymore.
+
+I noticed the processor racing as I ran this app and realized it was for the same reason. For these types of apps (anything employing a game loop), you'll want to do something to control the framerate. It was easy to adapt the example to go - you'll find that in the project.
+
+One thing that I wanted to add as well, is that when doing sort algorithms in cpp, you often have to resort to interating over collections using for loops, and using a temp container in order to swap two values. Cpp does have ranges, but it's one of the newer features - for go, you can swap elements without the temp variable, and ranges are better supported. Another interesting aspect of go is that there's no 'while loop', there's only the 'for' keyword which does all kinds of loops.
 
 Seems to me like cpp's great, but if you're looking for a modern continuation of what c did for the world of programming, you might agree that go is like the new version of c that the previous generation never got.
 
