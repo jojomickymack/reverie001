@@ -105,6 +105,6 @@ Source on github
 
 [https://github.com/jojomickymack/go_colorsort](https://github.com/jojomickymack/go_colorsort)
 
-Revised version with the reflection/sort interface enhancements eluded to in the article.
+Revised version with the reflection/sort interface enhancements alluded to in the article. Also added a 'reverse' button, and in doing so, forced myself into having 2 different button types - one that usees the sort.Sort() interface, and one that calls a function. Maybe there's a different optimization I could do to take care of that.
 
 [https://github.com/jojomickymack/go_colorsort2](https://github.com/jojomickymack/go_colorsort2)
