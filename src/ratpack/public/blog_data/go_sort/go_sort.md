@@ -78,3 +78,9 @@ reflect.ValueOf(object).FieldByName(objectField).Uint()
 	}
 
 Hopefully, if someone else is trying to do something similar, this example will help out.
+
+## More Complex Implementation
+
+I incorporated the same idea into a more substantial app and pushed it to github.
+
+[https://github.com/jojomickymack/go_colorsort2](https://github.com/jojomickymack/go_colorsort2)

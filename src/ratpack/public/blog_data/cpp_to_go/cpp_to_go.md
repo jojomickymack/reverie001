@@ -104,3 +104,7 @@ Seems to me like cpp's great, but if you're looking for a modern continuation of
 Source on github
 
 [https://github.com/jojomickymack/go_colorsort](https://github.com/jojomickymack/go_colorsort)
+
+Revised version with the reflection/sort interface enhancements eluded to in the article.
+
+[https://github.com/jojomickymack/go_colorsort2](https://github.com/jojomickymack/go_colorsort2)
