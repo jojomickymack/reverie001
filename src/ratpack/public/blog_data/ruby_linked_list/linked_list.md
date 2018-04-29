@@ -140,9 +140,7 @@ The implementation is short enough to just paste in here, one thing I wanted to 
     puts list
 
 The output is
-[france,[44, 77, orange, ], 32, yellow, green, 53, [washington,antarctica, ]#<Node:0x0000000004bb0c70>, cookies, chocolate, 14, sandwich, hopscotch, ]#<LinkedList:0x0000000004bb0478>
+[france,[44, 77, orange, ], 32, yellow, green, 53, [washington,antarctica, ], cookies, chocolate, 14, sandwich, hopscotch, ]
 
-I'm not sure how to get those object types and memory addresses out of there, obviously it's just cosmetic.
-
-Object notation and stray commas aside, it's a pretty concise class demonstrating why linked list has an overhead because you're iterating over elements in order to read them, but ends up being better for insertion and deletion from arbitrary indexes.
+Though it certainly would be bizarre if you decided to use your own implementation of a basic data structure like this instead of the one built into your programming language, it still is kind of cool to code up your own special list class. Maybe if you were making a list of something special that was supposed to do something custom when elements were accessed, you'd end up doing it in your own special linked list class. Maybe that's a little far fetched, but still, it's interesting.
 
