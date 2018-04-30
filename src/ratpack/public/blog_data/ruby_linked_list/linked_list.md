@@ -2,11 +2,13 @@
 
 A good programming interview question is if you should use a list or an array for a given problem. If you've studied algorithms and data structures, it's driven into your head pretty hard that there's certain things that each construct are good and bad at.
 
-Array elements typically have a fixed size - a certain 'measuring stick' that allows for you to traverse to a specific index easily. Memory addresses for array elements are expected to be adjacent to the previous and next one. That means if you know the index, you can immediately read it using the index. You can easily add a new element to the end of the array, knowing how long it is. What arrays are _bad_ at though, is inserting a new element or removing one from the middle of it - you can imagine how the indexes would all be off when elements are added/taken away, so you end up having to move the other elements.
+Array elements typically have a fixed size - a certain 'measuring stick' that allows for you to traverse to a specific index easily. Memory addresses for array elements are expected to be adjacent to the previous and next one. That means if you know the index, you can immediately read it using the index. You can't easily add a new element to the end of the array because that requires resizing the entire thing. What arrays are _bad_ at though, is inserting a new element or removing one from the middle of it - you can replace an item at a given index, but if you're trying to add an item between two other ones, you've got to resize the whole thing and move all of the elements after the new one up one index.
 
 Linked lists are more flexible for that insert/remove scenario because it's composed of nodes that have a reference to the next element stored in it. When adding/removing elements, only that reference to what the next element is supposed to be in the previous element needs to be changed. What linked lists are _bad_ at is reading when you know the index. Basically, you'll have to iterate over the entire thing to figure out if it's the 5th or 6th element. You'll do a lot more searching around when attempting to read data out of a linked list like this, whether to find the desired element or jumping around in memory, as linked list memory addresses can be completely out of order.
 
-There's a lot of optimizations that might end up making the choice less critical, but the fundamental point of the question isn't debatable, which makes it a good interview question. 
+The fixed size that arrays typically have (?) compared with how easy it is to add another item into a linked list is the reason arrays are a called 'linear' data structure and linked lists are 'dynamic'. You might say to yourself that arrays certainly can be expanded, but that's really because of optimizations in modern programming platforms.
+
+There's a lot of things like that with data structures and algorithms, but the fundamental points are still true. Often, the choice of the better approach to solve a problem is a question of math. Sometimes the advantage is trivial, especially given the incredible resources we can take for granted now.  
 
 ## Common Exercise - Create A Linked List
 
@@ -15,6 +17,8 @@ You might feel weird about re-implementing a data structure that already exists 
 A node construct that contains the value and a reference to the next element are core to the linked list - the rest of the implementation if to find the end of the list so a new element can be appended, finding a node in order to append after it and trading 'next' references with it, or deletion, which is finding the node before the element to be deleted and overwriting it with the one that was next.
 
 The implementation is short enough to just paste in here, one thing I wanted to be able to do was add in a nested array, or even another nested linked list. That's easy, it's just printing it out that's kind of messy, as with Ruby you can override the to_s method which gets called by print.
+
+This can easily be converted to a doubly linked list by including a 'previous' field in the node.
 
 	class Node
         attr_accessor :next
