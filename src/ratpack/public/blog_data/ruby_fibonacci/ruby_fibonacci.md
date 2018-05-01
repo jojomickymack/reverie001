@@ -66,7 +66,7 @@ You'll see some significant slowdown when attempting to return fibonacci over 30
 
 In the code below, you can see that there's a map called cache that is getting checked to see if there's a key matching the value we are looking for a calculation for. Only if it's not there in the map do we do the recursive operation - then when we get it back, we put it in the map. By printing the map at the end, you can see it's become a lookup table which minimizes how often the recursive function is called. When testing with or without the cache, you'll find caching literally is the difference between the program rapidly returning a value or stalling out and crashing.
 		
-		class Fibonacci
+	class Fibonacci
 
 	    attr_reader :cache
 
