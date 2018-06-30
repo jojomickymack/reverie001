@@ -180,11 +180,13 @@ Libgdx has top-notch support for Tiled maps, and it's really easy to load a map 
 	class Game(private val application: Application) : KtxScreen {
 	    val map = TmxMapLoader().load("map01.tmx")
 	    val mr = OrthogonalTiledMapRenderer(map)
-	    val cam = OrthographicCamera(width, height)
+	    val cam = OrthographicCamera()
 	    val width = Gdx.graphics.width.toFloat()
     	val height = Gdx.graphics.height.toFloat()
 
-	    init {}
+	    init {
+	    	cam.setToOrtho(false)
+	    }
 
 	    override fun render(delta: Float) {
 	        mr.setView(cam)
@@ -192,8 +194,80 @@ Libgdx has top-notch support for Tiled maps, and it's really easy to load a map 
 	    }
 	}
 
+If you want to, you can just use the OrthogonalTiledMapRenderer to do all of your drawing as shown below.
+
+        mr.batch.begin()
+        sprite.draw(mr.batch)
+        mr.batch.end()
+
+This is practical because there's no need to sync your renderers - you can get in quite a mess if your TiledMapRenderer has a different coordinate system or is scaled differently than ShapeRenderer or SpriteBatch. Chances are, when using multiple renderers you'll find out what I mean.
+
+There's some puzzling things you'll discover if you don't call cam.setToOrtho(false) - the tiled map will be gigantic, and the 0, 0 coordinate will be in the center of the screen. Go ahead and try setting setToOrtho to true, and you'll see everything is upside down because the y coordinate is reversed by that flag. You can set the width and height of the viewport either when initializing the variable or as additional arguments to setToOrtho.
+
+One thing that I seen a lot is where you impose a scale factor, and then initialize the map renderer with the scale factor as an argument, and then multiply the size and position of your sprites by the same scale factor, and call setToOrtho on your camera with some viewport width and height, as shown below.
+
+	const val scaleFactor = 1/16f
+
+	class Game(private val application: Application) : KtxScreen {
+	    val map = TmxMapLoader().load("map01.tmx")
+	    val mr = OrthogonalTiledMapRenderer(map, scaleFactor)
+	    val cam = OrthographicCamera()
+		val sprite = Sprite(Texture("adventurer.png"))
+		val width = Gdx.graphics.width.toFloat()
+    	val height = Gdx.graphics.height.toFloat()
+
+	    init {
+        	sprite.setPosition((width / 2) * scaleFactor, (height / 2) * scaleFactor)
+        	sprite.setSize(100f * scaleFactor, 100f * scaleFactor)
+	    	cam.setToOrtho(false, 35f, 25f)
+	    }
+
+	    override fun render(delta: Float) {
+	        mr.setView(cam)
+	        mr.render()
+
+	        mr.batch.begin()
+        	sprite.draw(mr.batch)
+        	mr.batch.end()	        
+	    }
+	}
+
+This may appear to be getting tedious and convoluted to follow and results in almost the same as what was shown before, and you'd be right about that - but the advantage is that you can now change the scale of the game by changing 16 to 32 or whatever, and stretching/sqashing the viewport by changing the width/height of the camera in the setToOrtho call. It's indispensable to be able to tweek those in one place. 
+
+## Controls
+
+I will briefly show how to handle inputs from the keyboard. Add the code below to your Game class.
+
+    private val inputProcessor = object : KtxInputAdapter {
+        override fun keyDown(keycode: Int): Boolean {
+            when (keycode) {
+                Keys.UP -> {
+                    sprite.setPosition(sprite.x, sprite.y + 5)
+                }
+                Keys.DOWN -> {
+                    sprite.setPosition(sprite.x, sprite.y - 5)
+                }
+                Keys.LEFT -> {
+                    sprite.setPosition(sprite.x - 5, sprite.y)
+                }
+                Keys.RIGHT -> {
+                    sprite.setPosition(sprite.x + 5, sprite.y)
+                }
+            }
+            return false
+        }
+    }
+
+    override fun show() {
+        Gdx.input.inputProcessor = InputMultiplexer(inputProcessor)
+    }
+
+Now when running the game, you should see that the sprite's position gets changed when you press the directional keys. In order for this to be closer to what we'd want for a platformer, we'd have the sprite in a class called Player which has a Vector2 called velocity, and we'd add and subtract from the x and y fields in that in the player's 'act' function where we'd add the velocity to the position and do logic on if the position is against a barrier or not. We'd want to implement a jump mechanic as well, and limit it from only being available when the player is touching the ground, otherwise you'd be able to fly.
+
+That will be a more complex example in the future.
+
 ## Summary
 
-Here I've presented the elements of a simple platformer game, like the KtxGame class, the Screen class, renderers, textures, sprites, the Stage class, and how to load a tiled map and render it.
+Here I've presented the elements of a simple platformer game, like the KtxGame class, the Screen class, renderers, textures, sprites, the Stage class, and how to load a tiled map and render it. I showed some options in how to get a batch for drawing things and went into some of the details of how to configure your camera and scale your coordinate system. I showed how to bind keyboard key-presses to in-game events using an inputProcessor.
 
-There's more topics I need to go into here such as scaling and combining your map and sprites and implementing collision detection. Coordinating how your camera is set and how the renderers are configured will make it so you can use different renders along with your tiled map and have it all match up.
+Other topics I want to get into are collision detection using tiled maps, how to position game objects and other things in a tiled object layer and read them into your game, and how to create an enemy class hierarchy and detect and handle collisions between them and the player.
