@@ -111,6 +111,8 @@ You don't have to use a Sprite - but there are advantages to doing so. A sprite 
 	class Game(private val application: Application) : KtxScreen {
 	    val sprite = Sprite(Texture("adventurer.png"))
 	    val sb = SpriteBatch()
+		val width = Gdx.graphics.width.toFloat()
+    	val height = Gdx.graphics.height.toFloat()	    
 
 	    init {
 	        sprite.setPosition(width / 2, height / 2)
