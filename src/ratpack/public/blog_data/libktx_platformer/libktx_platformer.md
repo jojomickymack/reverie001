@@ -32,9 +32,9 @@ Of the genres of games, I've always been compelled by platformers - being able t
 
 ## Programming Problems
 
-I've put a lot of thought and time into solving 'programming problems', and one thing I've become conscious of is that there's good problems and bad ones - good ones are fun to solve - you feel like you've learned something and are ready for the next challenge. Bad programming problems are those that keep you stuck all day - wasting your time trying to repair something that's broken. I've often felt that a programming often chooses their problems - and choosing to approach 2d game programming introduces some really fun things for you to figure out.
+I've put a lot of thought and time into solving 'programming problems', and one thing I've become conscious of is that there's good problems and bad ones - good ones are fun to solve - you feel like you've learned something and are ready for the next challenge. Bad programming problems are those that keep you stuck all day - wasting your time trying to repair something that's broken. I've often felt that sometimes, programmers get to chose their problems - hopefully you make choices that lead you to those exciting, fun to solve problems.
 
-If you're experimenting with programming, try to avoid bad programming problems - a good way to encounter those is by choosing a platform that really isn't suited for what you're trying to do with it.  
+If you're experimenting with programming, try to avoid bad programming problems - a good way to encounter those is by choosing a platform that really isn't suited for what you're trying to do with it. LibGDX really makes a solid case that java makes a great platform for learning about 2d game development.
 
 ## First Steps - The Bare Minimum
 
