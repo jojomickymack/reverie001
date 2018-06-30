@@ -92,7 +92,6 @@ Now let's load a texture and display that using a SpriteBatch. Replace the png w
 	class Game(private val application: Application) : KtxScreen {
 	    val tex = Texture("adventurer.png")
 	    val sb = SpriteBatch()
-
 		val width = Gdx.graphics.width.toFloat()  
 		val height = Gdx.graphics.height.toFloat()
 	    
@@ -181,8 +180,6 @@ Libgdx has top-notch support for Tiled maps, and it's really easy to load a map 
 	    val map = TmxMapLoader().load("map01.tmx")
 	    val mr = OrthogonalTiledMapRenderer(map)
 	    val cam = OrthographicCamera()
-	    val width = Gdx.graphics.width.toFloat()
-    	val height = Gdx.graphics.height.toFloat()
 
 	    init {
 	    	cam.setToOrtho(false)
