@@ -201,9 +201,15 @@ If you want to, you can just use the OrthogonalTiledMapRenderer to do all of you
 
 This is practical because there's no need to sync your renderers - you can get in quite a mess if your TiledMapRenderer has a different coordinate system or is scaled differently than ShapeRenderer or SpriteBatch. Chances are, when using multiple renderers you'll find out what I mean.
 
-There's some puzzling things you'll discover if you don't call cam.setToOrtho(false) - the tiled map will be gigantic, and the 0, 0 coordinate will be in the center of the screen. Go ahead and try setting setToOrtho to true, and you'll see everything is upside down because the y coordinate is reversed by that flag. You can set the width and height of the viewport either when initializing the variable or as additional arguments to setToOrtho.
+There's some puzzling things you'll discover if you don't call cam.setToOrtho(false) - the tiled map will be gigantic, and the 0, 0 coordinate will be in the center of the screen. Go ahead and try setting setToOrtho to true, and you'll see everything is upside down because the y coordinate is reversed by that flag. 
 
-One thing that I seen a lot is where you impose a scale factor, and then initialize the map renderer with the scale factor as an argument, and then multiply the size and position of your sprites by the same scale factor, and call setToOrtho on your camera with some viewport width and height, as shown below.
+## Game Units
+
+You can scale what the camera shows, the size of the tiles, and each renderer. It can be very confusing when different renderers you might be using have different coordinate systems. What you are supposed to do is initialize your OrthogonalTiledMapRenderer with a scale factor which cooresponds to the size of the tiles on it. If your map is composed of 16x16 tiled, you want for 16 to be the 'game unit' size. In order for other renderers to share that coordinate system, multiply positions and sizes by the same scale factor. Now 1 'game unit' matches the size of a tile.
+
+Now when calling setToOrtho() on your camera, you can dictate how many tiles will fit in the screen. The example below assumes that the map has 16x16 tiles, and we want to fit 35x25 in the camera's view.
+
+The use of a scale factor is very important for collision detection with tile layers in your map - you can query a tiled layer with integer cell coordinates to find out if there's a wall or floor near the player very easily.
 
 	const val scaleFactor = 1/16f
 
@@ -229,9 +235,94 @@ One thing that I seen a lot is where you impose a scale factor, and then initial
         	sprite.draw(mr.batch)
         	mr.batch.end()	        
 	    }
-	}
+	}	
 
-This may appear to be getting tedious and convoluted to follow and results in almost the same as what was shown before, and you'd be right about that - but the advantage is that you can now change the scale of the game by changing 16 to 32 or whatever, and stretching/sqashing the viewport by changing the width/height of the camera in the setToOrtho call. It's indispensable to be able to tweek those in one place. 
+In the next example I'll describe tiled 'object' layers. The scale factor is really most useful for detecting collisions with tiled layers - that makes initializing and multiplying everything by the scale factor optional if you don't care about that.
+
+## Tiled Object Layers
+
+Tiled Map editor has a concept of 'layers' - for example you might want to have one layer be the walls and floors of your game world, and another layer to be the background. There are different types of layers - regular 'tiled' layers and 'object' layers. When positioning a tile on a 'tiled' layer, it will have a cell coordinate and will fit into the grid. For total freedom from the grid, you can use object layers. This is intended for positioning shapes, points, and fields that can have meaning in your game. This assumes that there's an object layer called my_objects with a rectangle object called 'player' on it somewhere.
+
+	const val unitScale = 1 / 16f
+
+	// this is one of your class level fields
+	val sprite = Sprite(Texture("adventurer.png"))
+	val map = TmxMapLoader().load("map01.tmx")
+	val mr = OrthogonalTiledMapRenderer(map, scaleFactor)
+	val objectLayer = map.layers.get("my_objects")
+	val mapObjects = objectLayer.objects
+	val player = mapObjects["player"]	
+
+	// this goes in the init block
+    sprite.setSize(player.properties["width"] as Float * unitScale, player.properties["height"] as Float * unitScale)
+    sprite.setPosition(player.properties["x"] as Float * unitScale, player.properties["y"] as Float * unitScale)
+    
+    // this goes in the render() method - don't forget to include the camera and mr.render() call as shown before 
+    mr.batch.begin()
+    sprite.draw(mr.batch)
+    mr.batch.end()
+
+The width, height, x and y properties are included for any rectangular shape, but you could add any properties you want - maybe you have rectangles representing enemies and their hit-points are a property on the map object. Now you can handle all of these aspects of these game objects from the tile map, not in the source code.
+
+Some people prefer to only use object layers because they can make more dynamic maps which have curves and angles. Others stick with tiled layers for the collision layer and use an object layer for positioning game objects like spawn points for the player, enemy characters and items. You may create fields that cause the player to lose a life or move to the next level.
+
+When using object layers, you no longer have the luxury of being able to simply call render() on your map renderer and see your layer - that only works for tiled layers. Object layers need to be read in and drawn with a ShapeRenderer. Again, you'll need to make sure that the coordinates for your shape renderer match those of your map renderer. The example below shows how to get the object layer from the map and iterate over various types of shapes and draw them using the matching shape renderer method - it assumes that you have an object layer in your map called 'my_objects' that has some rectagles, circles, polygons and polylines. A polygon is a shape with 3 or more sides that is closed, a polyline is 2 or more points that doesn't have to close.
+
+Note that it's necessary to scale the projectionMatrix of the ShapeRenderer with sr.projectionMatrix = cam.combined.scl(unitScale). Try uncommenting this and you'll see that your tile layer and object layer don't match up right. If you change the x coordinate of the map to make it scroll to follow the player you'll see it's more and more displaced. Keep in mind that if you don't need to check for collisions with tiled layers, you can just remove everything having to do with unit scaling.
+
+	const val unitScale = 1 / 16f
+
+    class Game(val application: Application) : KtxScreen {
+        val map = TmxMapLoader().load("map01.tmx")
+        val renderer = OrthogonalTiledMapRenderer(map, unitScale)
+        val sr = ShapeRenderer()
+        val width = Gdx.graphics.width.toFloat()
+        val height = Gdx.graphics.height.toFloat()
+        val cam = OrthographicCamera(width, height)
+        val objectLayer = map.layers.get("my_objects")
+        val mapObjects = objectLayer.objects
+
+        init {
+            cam.setToOrtho(false, 35f, 25f)
+        }
+
+        override fun render(delta: Float) {
+            cam.update()
+            renderer.setView(cam)
+            renderer.render()
+
+            sr.projectionMatrix = cam.combined.scl(unitScale)
+
+            sr.begin(ShapeType.Line)
+            sr.setColor(0f, 1f, 1f, 1f)
+
+            mapObjects.forEach {
+                when (it) {
+                    is RectangleMapObject -> {
+                        val rectangle = it.rectangle
+                        sr.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height)
+                    }
+                    is PolygonMapObject -> {
+                        val polygon = it.polygon
+                        sr.polygon(polygon.transformedVertices)
+                    }
+                    is EllipseMapObject -> {
+                        val ellipse = it.ellipse
+                        sr.ellipse(ellipse.x, ellipse.y, ellipse.width, ellipse.height)
+                    }
+                    is PolylineMapObject -> {
+                        val polyline = it.polyline
+                        sr.polyline(polyline.transformedVertices)
+                    }
+                }
+            }
+            sr.end()
+        }
+    }
+
+One thing that's worth mentioning is that libgdx has great support for box2d - if you wanted to, you could turn your mapObjects into dynamic physical bodies in a box2d world and have another layer for static bodies and that could serve as your collision and physics system. It's a fantastic direction to go in, but it's said that real 'arcade' style physics are impossible to emulate using box2d - still, it's a lot of fun and easy to set up at this point.
+
+Reading in Tiled Map object layers and using them in your game is a very powerful technique for leveraging how easy it is to create the maps in your game. Part of making an interesting game is being able to easily incorporate art and level design assets, and tiled map editor really helps with this. By incorporating object layers you're not even confined to a grid.  
 
 ## Controls
 
