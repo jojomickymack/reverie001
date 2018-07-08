@@ -18,23 +18,17 @@ I hope to provide a simple explanation here of what the different elements are i
 
 In addition to using LibGDX, which is java, I'm using kotlin and LibKTX in the code here.
 
-LibKTX is a library that adds some kotlin-centric features to GDX - and since learning of its existence I wanted to put it to use. All of the KTX classes that are being extended are just wrappers around the LibGTX equivalent. 
-
-## Why Not 3d?
-
-The question has plagued game development studios for generations - does a game need to be 3d in order to be immersive and compelling? In the 90s, with the revolutionary statement that 'Doom' made, a lot of developers thought that 2d was suddenly a thing of the past, something that was forced on the world by limited hardware. The truth is, 3d brings so much complexity to a project, that you're going to end up spending an incredible amount of time modeling chairs, walls, and other decorations. Imagine how much easier it is to create a 2d image of something like that compared to doing it with 3d modeling software? That's why developers of first person games typically have a huge art department - because it's tedious and labor intensive.
-
-There's a secondary point I wanted to make about game mechanics - you are severely limited in the kinds of mechanics you can preset to the player with a first person game - which kind of shifts the focus of the application from that which can be implemented with programming to that which is simply shown to the player.
-
-2d games are an art form, and they're much more approachable to the casual player, and much simpler to design and ultimately play using common hardware.
-
-Of the genres of games, I've always been compelled by platformers - being able to control a character on the screen is almost an expression since it can be so dynamic. It's also a great place to showcase artwork, sounds, music and moods.
+LibKTX is a library that adds some kotlin-centric features to GDX - and since learning of its existence I wanted to put it to use. All of the KTX classes that are being extended are just wrappers around the LibGTX equivalent. That means that everything in here applies to GTX.
 
 ## Programming Problems
 
-I've put a lot of thought and time into solving 'programming problems', and one thing I've become conscious of is that there's good problems and bad ones - good ones are fun to solve - you feel like you've learned something and are ready for the next challenge. Bad programming problems are those that keep you stuck all day - wasting your time trying to repair something that's broken. I've often felt that sometimes, programmers get to chose their problems - hopefully you make choices that lead you to those exciting, fun to solve problems.
+I wanted to make a side point here about how making a 2d platformer puts you in a position to enjoy a unique kind of 'good programming problems' which might get you hooked on programming. 
 
-If you're experimenting with programming, try to avoid bad programming problems - a good way to encounter those is by choosing a platform that really isn't suited for what you're trying to do with it. LibGDX really makes a solid case that java makes a great platform for learning about 2d game development.
+I've put a lot of thought and time into solving 'programming problems', and one thing I've become conscious of is that there's good problems and bad ones - good ones are fun to solve - you feel like you've learned something and are ready for the next challenge. Bad programming problems are those that keep you stuck all day making futile attempts to fit a square peg through a round hole. Even if you manage to cram it through there, you might realize later that you would've been better off by _selecting a better problem to solve_. 
+
+If you're experimenting with programming, try to avoid bad programming problems - a good way to encounter those is by choosing a platform that really isn't suited for what you're trying to do with it. LibGDX and java _is_ a good platform for game development. That's not to say that everything is going to come together on its own - but you may realize during the process of figuring things out that you really were enjoying yourself while you did it. 
+
+If you're stuck on a bad programming problem standing between you and your creative goals, take a break by switching to a different problem. Try not to rush or force your solutions - remember that regardless of if you're playing games or making them, that it's _all just for fun anyway_. 
 
 ## First Steps - The Bare Minimum
 
@@ -172,11 +166,9 @@ The best resource for learning about this is the documentation on github.
 
 ## Tiled Maps
 
-If you have been playing indie games, chances are very high that you've encountered levels that were created using [Tiled](https://www.mapeditor.org/). When you think about it, facing the task of creating a compelling game level by coding it is an unreasonable undertaking. Having a level design tool that allows for you to drag and drop elements and position things visually is indispensable, and Tiled is the definitive tool for managing maps made up of tiles.
+If you have been playing indie games, chances are very high that you've encountered levels that were created using [Tiled](https://www.mapeditor.org/). When you think about it, level design is when creativity is applied - it's where your game world comes together. Having a level design tool that allows for you to drag and drop elements and position things visually is indispensable, and Tiled provides a simple interface for doing that. I'd recommend buying a copy, many game engines in a variety of languages support Tiled. 
 
-By incorporating Tiled maps, you are imposing a pattern on your project that you may not want, for example, if you're trying to make a single screen puzzle game, you might not really need tiled. If you seek to create a scrolling platformer, you're really going to want to purchase this tool.
-
-Libgdx has top-notch support for Tiled maps, and it's really easy to load a map created in this tool to your game. There's a special class called 'OrthogonalTiledMapRenderer' which you can simply call render() on in your render function, as shown below. In order to get the map to render right, you need to set the view to a camera. The Camera class is a topic unto itself, but let's just instantiate it here to get the map onto the screen and discuss it more later.
+Libgdx has top-notch support for Tiled maps, and it's really easy to load a map created in this tool to your game. There's a special class called 'OrthogonalTiledMapRenderer' which you can simply call render() on in your render function, as shown below. In order to get the map to render right, you need to set the view to a camera. The Camera class is a topic unto itself, but let's just instantiate it here to get the map onto the screen and discuss it more later. 
 
 	class Game(private val application: Application) : KtxScreen {
 	    val map = TmxMapLoader().load("map01.tmx")
@@ -203,13 +195,26 @@ This is practical because there's no need to sync your renderers - you can get i
 
 There's some puzzling things you'll discover if you don't call cam.setToOrtho(false) - the tiled map will be gigantic, and the 0, 0 coordinate will be in the center of the screen. Go ahead and try setting setToOrtho to true, and you'll see everything is upside down because the y coordinate is reversed by that flag. 
 
+## Tiles And Objects 
+
+Before going into the concept of 'units', I want to explain how tiled provides some different types of layers that you'll need to know about - 'tile layers' and 'object layers'. When you create a new tile map using Tiled, it gives you a 'tile layer'. Any tile layers you put on your map will automatically be rendered when you call render() on your OrthogonalTiledMapRenderer. Those tile layers consist of tiles placed on a grid of cells of whatever size you choose - if you have a tilesheet with tiles of 16x16 pixels, that's something you'll want to incorporate into your game. By setting a constant indicating that's what your game unit is, you can initialize your renderer with that value.
+
+	const val scaleFactor = 1/16f
+
+	...
+	val mr = OrthogonalTiledMapRenderer(map, scaleFactor)
+
+You'll be able to call getCell(x, y) on your TiledMapTileLayer and find out easily what the contents are - you might have a solid block that the player needs to respond to, you might have a collectable or a power up type of item in that cell, or it might be a hazard or something that damages the player. It's really convenient to be able to place those tiles in the map editor and be able to query for them in your game. In order for that to work, everything you're rendering in your game like sprites and shapes will need to be scaled from pixel coordinates into the cell coordinates. What I've become accustomed to is keeping a scaledRect Rectangle object with each of my game objects, and multiplying its dimensions by the scaleFactor and doing logic on that with the tile map. 
+
+If you wanted to, you could just forgo from using tiled layers completely and just use object layers. Object layers place things in pixel coordinates, so you don't need to scale things down or initialize your map renderer with a scale factor. What you lose is the ability to see layers immediately by just calling render() and being able to query for cells. 
+
+By using only object layers, you have to render everything yourself, which is not such a bad thing. The following examples attempt to use a tiled layer _and_ and object layer together, but keep in mind that the coordinate systems are different and that's why renderers and location coordinates get scaled down. 
+
 ## Game Units
 
-You can scale what the camera shows, the size of the tiles, and each renderer. It can be very confusing when different renderers you might be using have different coordinate systems. What you are supposed to do is initialize your OrthogonalTiledMapRenderer with a scale factor which cooresponds to the size of the tiles on it. If your map is composed of 16x16 tiled, you want for 16 to be the 'game unit' size. In order for other renderers to share that coordinate system, multiply positions and sizes by the same scale factor. Now 1 'game unit' matches the size of a tile.
+You can scale what the camera shows, the size of the tiles, and each renderer. It can get confusing when different renderers you might be using have different coordinate systems. 
 
-Now when calling setToOrtho() on your camera, you can dictate how many tiles will fit in the screen. The example below assumes that the map has 16x16 tiles, and we want to fit 35x25 in the camera's view.
-
-The use of a scale factor is very important for collision detection with tile layers in your map - you can query a tiled layer with integer cell coordinates to find out if there's a wall or floor near the player very easily.
+Now when calling setToOrtho() on your camera, you can dictate how many tiles will fit in the screen. The example below assumes that the map has 16x16 tiles, and we want the camera's view to contain 35x25 tiles.
 
 	const val scaleFactor = 1/16f
 
@@ -237,11 +242,10 @@ The use of a scale factor is very important for collision detection with tile la
 	    }
 	}	
 
-In the next example I'll describe tiled 'object' layers. The scale factor is really most useful for detecting collisions with tiled layers - that makes initializing and multiplying everything by the scale factor optional if you don't care about that.
 
 ## Tiled Object Layers
 
-Tiled Map editor has a concept of 'layers' - for example you might want to have one layer be the walls and floors of your game world, and another layer to be the background. There are different types of layers - regular 'tiled' layers and 'object' layers. When positioning a tile on a 'tiled' layer, it will have a cell coordinate and will fit into the grid. For total freedom from the grid, you can use object layers. This is intended for positioning shapes, points, and fields that can have meaning in your game. This assumes that there's an object layer called my_objects with a rectangle object called 'player' on it somewhere.
+When positioning a tile on a 'tiled' layer, it will have a cell coordinate and will fit into the grid, but when using an 'object' layer, coordinates are in pixels. Object layers are intended for positioning shapes, points, and fields that can have meaning in your game. This assumes that there's an object layer called my_objects with a rectangle object called 'player' on it somewhere. Note that in order to 'sync up' with the unitScale we're instantiating our map renderer with, we need to multiply the pixel coordinates we get from the map's object layer by the unitScale. If we were only dealing with 'object' layers and no 'tile' layers, we wouldn't have to do that.
 
 	const val unitScale = 1 / 16f
 
@@ -269,6 +273,8 @@ Some people prefer to only use object layers because they can make more dynamic 
 When using object layers, you no longer have the luxury of being able to simply call render() on your map renderer and see your layer - that only works for tiled layers. Object layers need to be read in and drawn with a ShapeRenderer. Again, you'll need to make sure that the coordinates for your shape renderer match those of your map renderer. The example below shows how to get the object layer from the map and iterate over various types of shapes and draw them using the matching shape renderer method - it assumes that you have an object layer in your map called 'my_objects' that has some rectagles, circles, polygons and polylines. A polygon is a shape with 3 or more sides that is closed, a polyline is 2 or more points that doesn't have to close.
 
 Note that it's necessary to scale the projectionMatrix of the ShapeRenderer with sr.projectionMatrix = cam.combined.scl(unitScale). Try uncommenting this and you'll see that your tile layer and object layer don't match up right. If you change the x coordinate of the map to make it scroll to follow the player you'll see it's more and more displaced. Keep in mind that if you don't need to check for collisions with tiled layers, you can just remove everything having to do with unit scaling.
+
+Note that you might be inclined to multiply each of the transformedVertices from a polygon or polyline by the unitScale and render them, but when I tried that it caused distortion and made the first coordinate 0, 0. I'm still not sure why that occurs, but to avoid it, scale the shape renderer's projection matrix as shown here. 
 
 	const val unitScale = 1 / 16f
 
@@ -320,9 +326,9 @@ Note that it's necessary to scale the projectionMatrix of the ShapeRenderer with
         }
     }
 
-One thing that's worth mentioning is that libgdx has great support for box2d - if you wanted to, you could turn your mapObjects into dynamic physical bodies in a box2d world and have another layer for static bodies and that could serve as your collision and physics system. It's a fantastic direction to go in, but it's said that real 'arcade' style physics are impossible to emulate using box2d - still, it's a lot of fun and easy to set up at this point.
+## Serializing Shapes Into Box2d Bodies 
 
-Reading in Tiled Map object layers and using them in your game is a very powerful technique for leveraging how easy it is to create the maps in your game. Part of making an interesting game is being able to easily incorporate art and level design assets, and tiled map editor really helps with this. By incorporating object layers you're not even confined to a grid.  
+One thing that's worth mentioning is that libgdx has great support for box2d - if you wanted to, you could turn your mapObjects into dynamic physical bodies in a box2d world and have another layer for static bodies and that could serve as your collision and physics system. It's a fantastic direction to go in, but it's said that real 'arcade' style physics are impossible to emulate using box2d - still, it's a lot of fun and easy to set up at this point. 
 
 ## Controls
 
@@ -352,9 +358,7 @@ I will briefly show how to handle inputs from the keyboard. Add the code below t
         Gdx.input.inputProcessor = InputMultiplexer(inputProcessor)
     }
 
-Now when running the game, you should see that the sprite's position gets changed when you press the directional keys. In order for this to be closer to what we'd want for a platformer, we'd have the sprite in a class called Player which has a Vector2 called velocity, and we'd add and subtract from the x and y fields in that in the player's 'act' function where we'd add the velocity to the position and do logic on if the position is against a barrier or not. We'd want to implement a jump mechanic as well, and limit it from only being available when the player is touching the ground, otherwise you'd be able to fly.
-
-That will be a more complex example in the future.
+Now when running the game, you should see that the sprite's position gets changed when you press the directional keys. In order for this to be closer to what we'd want for a platformer, we'd have the sprite in a class called Player which has a Vector2 called velocity, and we'd add and subtract from the x and y fields in that in the player's 'act' function where we'd add the velocity to the position and do logic on if the position is against a barrier or not. We'd want to implement a jump mechanic as well, and limit it from only being available when the player is touching the ground, otherwise you'd be able to fly. 
 
 ## Summary
 
