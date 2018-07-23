@@ -12,7 +12,7 @@ The android-x86 project and lineage os (formerly cyanogenmod) have teamed up and
 
 I'm not sure why I'm so hung up on running netflix on x86 android, probably because it's a little challenging to do.  
 
-A new obstacle is that netflix won't be searchable in the play store if you're using a rooted device. Even if you could get it from the play store, it would just crash on you, as is the case if you should go over to (apkmirror) [https://www.apkmirror.com] and download an apk from there.  
+A new obstacle is that netflix won't be searchable in the play store if you're using a rooted device. Even if you could get it from the play store, it would just crash on you, as is the case if you should go over to [apkmirror] (https://www.apkmirror.com) and download an apk from there.  
 
 Netflix will also not work in browser when requesting the desktop site - maybe that will change someday.  
 
