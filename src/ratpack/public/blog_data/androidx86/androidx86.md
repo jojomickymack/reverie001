@@ -6,16 +6,21 @@ Android is engineered for ARM processors, which are vastly more efficient for lo
 
 The concept of desktop Android is definitely gaining more traction since Google started manufacturing Chromebooks with built in Android app support, but for running Android as your primary OS, Androidx86 is the solution. This blog entry is a repository for general information about the platform and how to get around some issues.
 
+The android-x86 project and lineage os (formerly cyanogenmod) have teamed up and on [the website,](http://www.android-x86.org) you can see that a lot of the builds available are lineage os/cm variants. I'd highly recommend giving lineage os a try - it's the best android n 'windowed app' experience I've tried.  
+
 ## Getting Netflix To Work
 
-On a fresh install using the livecd, you'll find that Chrome doesn't support running netflix in browser, and that the app crashes. I'm not sure what the cause of this is, but there's a special build of the app provided for compatibility with Android 4 which will run on Androidx86.
+I'm not sure why I'm so hung up on running netflix on x86 android, probably because it's a little challenging to do.  
 
-The instructions are pretty clear at [this link](https://help.netflix.com/en/node/57688), but if the link is down, this is a summary.
+A new obstacle is that netflix won't be searchable in the play store if you're using a rooted device. Even if you could get it from the play store, it would just crash on you, as is the case if you should go over to [apkmirror] (https://www.apkmirror.com/) and download an apk from there.  
 
-Enable 'allow apps from other sources' in the security menu.
-Install the old app downloaded from [this link](https://netflixhelp.s3.amazonaws.com/netflix-4.16-200147-release.apk)
+Netflix will also not work in browser when requesting the desktop site - maybe that will change someday.  
 
-Hopefully the source of the issue is resolved in a downstream version of Androidx86.
+The trick is to enable 'app compatibility' in the android settings - instead of crashing, those apps will start and notify you that the app won't run on your device... but there is a version that will work.  
+
+The special build of the app provided for compatibility with Android 4 will run on Androidx86 - you can dig it up by searching support, here is [the link](https://help.netflix.com/en/node/57688), but if the link is down, this is a summary.
+
+Enable 'allow apps from other sources' in the security menu, then install [this.](https://netflixhelp.s3.amazonaws.com/netflix-4.16-200147-release.apk)  
 
 ## Using An External Monitor
 
