@@ -1,0 +1,3 @@
+[submodule "src/ratpack/public"]
+	path = src/ratpack/public
+	url = https://github.com/jojomickymack/public-folder.git
