@@ -52,7 +52,7 @@ html {
                     ul {
                         for (i in indexes) {
                             li {
-                                a(href: contents[i].url, style: "margin-left: ${getRandomMargin()}%;"){'wired-button'(text: contents[i].title, elevation: Math.floor(Math.random() * 5), style: "color: ${getRandom(colors)}; padding: ${Math.floor(Math.random() * 20) + 8}px;") {}}
+                                a(href: "groovy/${contents[i].url}", style: "margin-left: ${getRandomMargin()}%;"){'wired-button'(text: contents[i].title, elevation: Math.floor(Math.random() * 5), style: "color: ${getRandom(colors)}; padding: ${Math.floor(Math.random() * 20) + 8}px;") {}}
                             }
                         }
                     }

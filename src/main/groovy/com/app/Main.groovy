@@ -30,12 +30,12 @@ class Main {
             .handlers(Groovy.chain{
                 files { dir 'public' }
 
-                get {
+                get('groovy') {
                     render groovyMarkupTemplate('index.gtpl', contents: contents)
                 }
 
                 contents.eachWithIndex { content, i ->
-                    get(content.url) {
+                    get("groovy/${content.url}") {
                         render groovyMarkupTemplate("${content.content_type}_template.gtpl", title: contents[i].title)
                     }
                 }
