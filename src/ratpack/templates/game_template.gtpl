@@ -36,7 +36,7 @@ html {
                     br {}
                     input(id: 'myButton', class: 'button', type: 'button', onclick: "target='jsgame'; launchGame('$game.iframe_path');", value: 'Launch Fullscreen')
 
-                    script(type: 'text/javascript', src: '/scripts/buttonScript.js') {}
+                    script(type: 'text/javascript', src: '/js/buttonScript.js') {}
                 }
             }
         }
