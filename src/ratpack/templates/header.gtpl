@@ -22,10 +22,10 @@ link(href: 'https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display', rel: 
 
 // custom js
 
-script('', type: 'text/javascript', src: '/scripts/main.js')
+script('', type: 'text/javascript', src: '/js/main.js')
 
 // custom css
 
-link(href: '/styles/main.css', rel: 'stylesheet', type: 'text/css')
+link(href: '/css/main.css', rel: 'stylesheet', type: 'text/css')
 
 a(href: '/'){ h1 'Reverie + Fun' }
