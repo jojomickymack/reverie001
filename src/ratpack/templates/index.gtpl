@@ -42,7 +42,8 @@ html {
 
                     div(class: 'head') {
                         div(class: 'spHeading') {
-                            h2 'cliq dem links'
+                            q 'Know not to revere human things too much.'
+                            p 'Aeschylus'
                         }
                     }
 
