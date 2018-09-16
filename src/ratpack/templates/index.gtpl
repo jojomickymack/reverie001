@@ -43,6 +43,8 @@ html {
                     div(class: 'head') {
                         div(class: 'spHeading') {
                             q 'Know not to revere human things too much.'
+                            br()
+                            br()
                             p 'Aeschylus'
                         }
                     }
